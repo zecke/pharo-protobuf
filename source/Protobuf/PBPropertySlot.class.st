@@ -1,0 +1,124 @@
+Class {
+	#name : #PBPropertySlot,
+	#superclass : #InstanceVariableSlot,
+	#instVars : [
+		'encodingType',
+		'fieldName',
+		'jsonFieldName',
+		'jsonOmitEmpty',
+		'defaultValue',
+		'optional',
+		'repeated',
+		'fieldNumber'
+	],
+	#category : #'Protobuf-Slots'
+}
+
+{ #category : #accessing }
+PBPropertySlot >> beOptional [
+	optional := true
+]
+
+{ #category : #accessing }
+PBPropertySlot >> beRepeated [
+	repeated := true
+]
+
+{ #category : #'as yet unclassified' }
+PBPropertySlot >> decodeFrom: aValue to: anInstance [ 
+	"TODO(zecke): Make this a subclass to distinguish repeated from flat or have
+	encodingType that is instance based and repeated?"
+	thisContext object: anInstance instVarAt: index put: (encodingType unmarshalFrom: aValue).
+]
+
+{ #category : #accessing }
+PBPropertySlot >> defaultValue: aValue [
+	defaultValue := aValue
+]
+
+{ #category : #accessing }
+PBPropertySlot >> encodingType: aType [
+	"Either a class like PBTypeBool or subclasses based on PBTypeEnum and PBTypeMessage."
+	encodingType := aType
+]
+
+{ #category : #'as yet unclassified' }
+PBPropertySlot >> fieldName [
+	^ fieldName
+]
+
+{ #category : #accessing }
+PBPropertySlot >> fieldName: aName [
+	fieldName := aName
+]
+
+{ #category : #'as yet unclassified' }
+PBPropertySlot >> fieldNumber [
+	^ fieldNumber
+]
+
+{ #category : #'as yet unclassified' }
+PBPropertySlot >> fieldNumber: anInteger [ 
+	fieldNumber := anInteger
+]
+
+{ #category : #comparing }
+PBPropertySlot >> hasSameDefinitionAs: otherSlot [
+
+	^ (super hasSameDefinitionAs: otherSlot) 
+		and: [ fieldNumber = otherSlot fieldNumber
+		and: [ fieldName = otherSlot fieldName ] ]
+]
+
+{ #category : #accessing }
+PBPropertySlot >> initialize [
+	super initialize.
+	optional := false.
+	repeated := false.
+	jsonOmitEmpty := false.
+]
+
+{ #category : #accessing }
+PBPropertySlot >> jsonFieldName: aName [
+	jsonFieldName := aName
+]
+
+{ #category : #accessing }
+PBPropertySlot >> jsonOmitEmtpy: aBoolean [
+	jsonOmitEmpty := aBoolean
+]
+
+{ #category : #printing }
+PBPropertySlot >> printOn: aStream [
+	aStream 
+		store: self name;
+		nextPutAll: ' => (';
+		nextPutAll: encodingType name;
+		nextPutAll: ' asSlot fieldName: '''; nextPutAll: fieldName;
+		nextPutAll: '''; fieldNumber: ';
+		nextPutAll: fieldNumber displayString.
+	optional ifTrue: [
+		aStream nextPutAll: '; beOptional'
+	].
+	repeated ifTrue: [
+		aStream nextPutAll: '; beRepeated'
+	].
+	defaultValue ifNotNil: [
+		aStream
+			nextPutAll: '; defaultValue: ''';
+			nextPutAll: defaultValue;
+			nextPutAll: ''''.
+	].
+	jsonFieldName ifNotNil: [
+		aStream
+			nextPutAll: '; jsonFieldName: ''';
+			nextPutAll: jsonFieldName;
+			nextPutAll: ''''.
+	].
+	jsonOmitEmpty ifTrue: [
+		aStream
+			nextPutAll: '; jsonOmitEmpty: true'
+	].
+	aStream
+		nextPutAll: ')'.
+]
