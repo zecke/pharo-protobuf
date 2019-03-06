@@ -17,6 +17,16 @@ PBTypeName class >> asSlot [
 ]
 
 { #category : #'as yet unclassified' }
+PBTypeName class >> decodeFrom: aValue instVarIndex: anIndex to: anInstance [ 
+	thisContext object: anInstance instVarAt: anIndex put: (self unmarshalFrom: aValue).
+]
+
+{ #category : #'as yet unclassified' }
+PBTypeName class >> typeName [
+	^self name
+]
+
+{ #category : #'as yet unclassified' }
 PBTypeName class >> validate: anInstance [
 	(self doValidate: anInstance) ifFalse: [ PBTypeInvalidError signal: 'Type not valid' ]
 ]

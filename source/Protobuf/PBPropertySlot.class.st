@@ -21,14 +21,15 @@ PBPropertySlot >> beOptional [
 
 { #category : #accessing }
 PBPropertySlot >> beRepeated [
-	repeated := true
+	repeated := true.
+	encodingType := PBRepeatedType initWith: encodingType. 
 ]
 
 { #category : #'as yet unclassified' }
 PBPropertySlot >> decodeFrom: aValue to: anInstance [ 
 	self flag: #todo. "TODO(zecke): Make this a subclass to distinguish repeated from flat or have
 	encodingType that is instance based and repeated?"
-	thisContext object: anInstance instVarAt: index put: (encodingType unmarshalFrom: aValue).
+	encodingType decodeFrom: aValue instVarIndex: index to: anInstance.
 ]
 
 { #category : #accessing }
@@ -93,6 +94,7 @@ PBPropertySlot >> materialize: anObject to: aStream [
 	| val |
 	self flag: #TODO. "Skip optional entries that are 0"
 	val := thisContext object: anObject instVarAt: index.
+	(val isNil & (optional | repeated)) ifTrue: [ ^self ].
 	encodingType marshal: val to: aStream with: self.
 ]
 
@@ -101,7 +103,7 @@ PBPropertySlot >> printOn: aStream [
 	aStream 
 		store: self name;
 		nextPutAll: ' => (';
-		nextPutAll: encodingType name;
+		nextPutAll: encodingType typeName;
 		nextPutAll: ' asSlot fieldName: '''; nextPutAll: fieldName;
 		nextPutAll: '''; fieldNumber: ';
 		nextPutAll: fieldNumber displayString.
