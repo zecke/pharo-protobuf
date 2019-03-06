@@ -10,6 +10,21 @@ Class {
 }
 
 { #category : #'class initialization' }
+PBTestEnumColor class >> BLUE [
+	^BLUE
+]
+
+{ #category : #'class initialization' }
+PBTestEnumColor class >> GREEN [
+	^GREEN
+]
+
+{ #category : #'class initialization' }
+PBTestEnumColor class >> RED [
+	^RED
+]
+
+{ #category : #'class initialization' }
 PBTestEnumColor class >> initialize [
 	RED := 0.
 	GREEN := 1.

@@ -1,6 +1,6 @@
 Class {
 	#name : #PBPropertySlot,
-	#superclass : #InstanceVariableSlot,
+	#superclass : #AccessorInstanceVariableSlot,
 	#instVars : [
 		'encodingType',
 		'fieldName',
@@ -86,6 +86,14 @@ PBPropertySlot >> jsonFieldName: aName [
 { #category : #accessing }
 PBPropertySlot >> jsonOmitEmtpy: aBoolean [
 	jsonOmitEmpty := aBoolean
+]
+
+{ #category : #'as yet unclassified' }
+PBPropertySlot >> materialize: anObject to: aStream [
+	| val |
+	self flag: #TODO. "Skip optional entries that are 0"
+	val := thisContext object: anObject instVarAt: index.
+	encodingType marshal: val to: aStream with: self.
 ]
 
 { #category : #printing }

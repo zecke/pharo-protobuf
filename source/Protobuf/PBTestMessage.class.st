@@ -6,3 +6,13 @@ Class {
 	],
 	#category : #'Protobuf-Tests'
 }
+
+{ #category : #accessing }
+PBTestMessage >> color [
+	 ^color
+]
+
+{ #category : #accessing }
+PBTestMessage >> color: anObject [
+	color:= anObject.
+]

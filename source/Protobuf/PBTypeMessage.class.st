@@ -26,6 +26,18 @@ PBTypeMessage >> initializeDefaults [
 ]
 
 { #category : #'as yet unclassified' }
+PBTypeMessage >> materialize [
+	^ByteArray streamContents: [:str |
+		self materializeTo: (PBWireEncoder on: str)].
+]
+
+{ #category : #'as yet unclassified' }
+PBTypeMessage >> materializeTo: aStream [
+	self class slots do: [:each |
+		each materialize: self to: aStream]
+]
+
+{ #category : #'as yet unclassified' }
 PBTypeMessage >> readFrom: aReadStream [ 
 	| decoder slotDict |
 	"Get a map from fieldNumber to Slot."
