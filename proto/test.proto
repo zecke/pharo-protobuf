@@ -1,0 +1,15 @@
+syntax = "proto2";
+
+package foo;
+
+enum Color {
+	RED = 0;
+	GREEN = 1;
+	BLUE = 2;
+}
+
+message MyMessage {
+	optional Color color = 1;
+	optional int32 dont_set = 2; // Used to test optional but empty fields
+	repeated double other_colors = 3;
+}

@@ -1,0 +1,3 @@
+color: BLUE
+other_colors: 3.0
+other_colors: 4.6
