@@ -20,8 +20,3 @@ PBTypeName class >> asSlot [
 PBTypeName class >> validate: anInstance [
 	(self doValidate: anInstance) ifFalse: [ PBTypeInvalidError signal: 'Type not valid' ]
 ]
-
-{ #category : #'as yet unclassified' }
-PBTypeName >> marshalProtobuf [
-	self shouldBeImplemented.
-]

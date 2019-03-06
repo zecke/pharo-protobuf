@@ -26,7 +26,7 @@ PBPropertySlot >> beRepeated [
 
 { #category : #'as yet unclassified' }
 PBPropertySlot >> decodeFrom: aValue to: anInstance [ 
-	"TODO(zecke): Make this a subclass to distinguish repeated from flat or have
+	self flag: #todo. "TODO(zecke): Make this a subclass to distinguish repeated from flat or have
 	encodingType that is instance based and repeated?"
 	thisContext object: anInstance instVarAt: index put: (encodingType unmarshalFrom: aValue).
 ]
@@ -64,7 +64,7 @@ PBPropertySlot >> fieldNumber: anInteger [
 
 { #category : #comparing }
 PBPropertySlot >> hasSameDefinitionAs: otherSlot [
-
+	self flag: #todo. "Compare other attributes!"
 	^ (super hasSameDefinitionAs: otherSlot) 
 		and: [ fieldNumber = otherSlot fieldNumber
 		and: [ fieldName = otherSlot fieldName ] ]

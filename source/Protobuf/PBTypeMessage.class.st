@@ -6,6 +6,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 PBTypeMessage class >> fieldNumberToSlotMap [
+	self flag: #todo. "Memoize this somehow in the class?"
 	^ self slots inject: Dictionary new into: [:dict :slot |
 		dict at: slot fieldNumber put: slot.
 		dict.
@@ -21,7 +22,7 @@ PBTypeMessage class >> materializeFrom: aReadStream [
 
 { #category : #'as yet unclassified' }
 PBTypeMessage >> initializeDefaults [
-	"TODO(zecke): Initialize these based on the slots."
+	self flag: #todo. "TODO(zecke): Initialize these based on the slots."
 ]
 
 { #category : #'as yet unclassified' }
@@ -38,4 +39,5 @@ PBTypeMessage >> readFrom: aReadStream [
 		decoder nextFieldDo: [:field :value |
 			slotDict at: field ifPresent: [:slot |
 				slot decodeFrom: value to: self]]].
+	self flag: #todo. "Check if all non-optional are set?"
 ]
