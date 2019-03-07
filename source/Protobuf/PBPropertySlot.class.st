@@ -68,7 +68,10 @@ PBPropertySlot >> hasSameDefinitionAs: otherSlot [
 	self flag: #todo. "Compare other attributes!"
 	^ (super hasSameDefinitionAs: otherSlot) 
 		and: [ fieldNumber = otherSlot fieldNumber
-		and: [ fieldName = otherSlot fieldName ] ]
+		and: [ fieldName = otherSlot fieldName
+		and: [ optional = otherSlot optional
+		and: [ repeated = otherSlot repeated
+		]]]]
 ]
 
 { #category : #accessing }
@@ -98,6 +101,11 @@ PBPropertySlot >> materialize: anObject to: aStream [
 	encodingType marshal: val to: aStream with: self.
 ]
 
+{ #category : #'as yet unclassified' }
+PBPropertySlot >> optional [
+	^ optional
+]
+
 { #category : #printing }
 PBPropertySlot >> printOn: aStream [
 	aStream 
@@ -114,10 +122,14 @@ PBPropertySlot >> printOn: aStream [
 		aStream nextPutAll: '; beRepeated'
 	].
 	defaultValue ifNotNil: [
+		| stringValue |
+		"Write integers and booleans without quotes"
+		stringValue := defaultValue isCollection
+								ifTrue: [ '''', defaultValue displayString, '''' ]
+								ifFalse: [ defaultValue displayString ].
 		aStream
-			nextPutAll: '; defaultValue: ''';
-			nextPutAll: defaultValue;
-			nextPutAll: ''''.
+			nextPutAll: '; defaultValue: ';
+			nextPutAll: stringValue.
 	].
 	jsonFieldName ifNotNil: [
 		aStream
@@ -131,4 +143,9 @@ PBPropertySlot >> printOn: aStream [
 	].
 	aStream
 		nextPutAll: ')'.
+]
+
+{ #category : #'as yet unclassified' }
+PBPropertySlot >> repeated [
+	^ repeated
 ]

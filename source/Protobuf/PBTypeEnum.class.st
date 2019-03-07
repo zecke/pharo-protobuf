@@ -14,3 +14,8 @@ PBTypeEnum class >> unmarshalFrom: anInteger [
 	self flag: #todo. "TODO(holgerf): Do input validation and if this value is valid?"
 	^anInteger
 ]
+
+{ #category : #'as yet unclassified' }
+PBTypeEnum class >> wireType [
+	^PBWireTypeVarInt
+]

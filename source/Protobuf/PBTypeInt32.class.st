@@ -3,3 +3,8 @@ Class {
 	#superclass : #PBTypeName,
 	#category : #'Protobuf-Slots'
 }
+
+{ #category : #'as yet unclassified' }
+PBTypeInt32 class >> unmarshalFrom: anInteger [ 
+	^anInteger
+]

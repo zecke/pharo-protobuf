@@ -21,6 +21,11 @@ PBTypeMessage class >> materializeFrom: aReadStream [
 ]
 
 { #category : #'as yet unclassified' }
+PBTypeMessage class >> unmarshalFrom: aByteArray [ 
+	^self materializeFrom: aByteArray readStream
+]
+
+{ #category : #'as yet unclassified' }
 PBTypeMessage >> initializeDefaults [
 	self flag: #todo. "TODO(zecke): Initialize these based on the slots."
 ]
@@ -49,7 +54,8 @@ PBTypeMessage >> readFrom: aReadStream [
 	"Read until the stream is empty"
 	[ aReadStream atEnd ] whileFalse: [
 		decoder nextFieldDo: [:field :value |
-			slotDict at: field ifPresent: [:slot |
-				slot decodeFrom: value to: self]]].
+			slotDict at: field
+				ifPresent: [:slot | slot decodeFrom: value to: self]
+				]].
 	self flag: #todo. "Check if all non-optional are set?"
 ]
