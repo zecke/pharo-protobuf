@@ -15,6 +15,7 @@ script:
 - $SMALLTALK_CI_HOME/run.sh
 
 after_success:
+ - find $SMALLTALK_CI_BUILD
  - python -mbenchupload --dir=$SMALLTALK_CI_BUILD
 
 after_failure:
