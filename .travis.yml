@@ -15,7 +15,7 @@ script:
 - $SMALLTALK_CI_HOME/run.sh
 
 after_success:
- - find /home/travis
+ - find /home/travis -name "*.xml"
  - python -mbenchupload --dir=$SMALLTALK_CI_BUILD
 
 after_failure:
