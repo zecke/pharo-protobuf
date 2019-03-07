@@ -15,6 +15,6 @@ BaselineOfProtobuf >> baseline: spec [
 		spec
 			group: 'default' with: #('Core' 'Tests' 'Compiler');
 			group: 'Core' with: 'Protobuf';
-			group: 'Tests' with: 'Protobuf';
+			group: 'Tests' with: 'Protobuf-Tests';
 			group: 'Compiler' with: 'Protobuf-Compiler']
 ]
