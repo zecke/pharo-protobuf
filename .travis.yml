@@ -16,7 +16,7 @@ script:
 
 after_success:
  - find /home/travis -name "*.xml"
- - python -mbenchupload --dir=$SMALLTALK_CI_BUILD
+ - python -mbenchupload
 
 after_failure:
- - python -mbenchupload --dir=$SMALLTALK_CI_BUILD
+ - python -mbenchupload
