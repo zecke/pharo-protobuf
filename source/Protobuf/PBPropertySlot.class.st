@@ -1,6 +1,6 @@
 Class {
 	#name : #PBPropertySlot,
-	#superclass : #AccessorInstanceVariableSlot,
+	#superclass : #InstanceVariableSlot,
 	#instVars : [
 		'encodingType',
 		'fieldName',
@@ -9,10 +9,16 @@ Class {
 		'defaultValue',
 		'optional',
 		'repeated',
-		'fieldNumber'
+		'fieldNumber',
+		'encodingTypeName'
 	],
 	#category : #'Protobuf-Slots'
 }
+
+{ #category : #'instance creation' }
+PBPropertySlot class >> with: aType [
+	^self new encodingTypeName: aType
+]
 
 { #category : #accessing }
 PBPropertySlot >> beOptional [
@@ -40,7 +46,20 @@ PBPropertySlot >> defaultValue: aValue [
 { #category : #accessing }
 PBPropertySlot >> encodingType: aType [
 	"Either a class like PBTypeBool or subclasses based on PBTypeEnum and PBTypeMessage."
-	encodingType := aType
+	encodingType := aType.
+	encodingTypeName := aType typeName.
+]
+
+{ #category : #'as yet unclassified' }
+PBPropertySlot >> encodingTypeName [
+	^ encodingTypeName ifNil: [ encodingType typeName ]
+]
+
+{ #category : #accessing }
+PBPropertySlot >> encodingTypeName: aTypeName [
+	"Either a class like PBTypeBool or subclasses based on PBTypeEnum and PBTypeMessage."
+	encodingType := nil.
+	encodingTypeName := aTypeName.
 ]
 
 { #category : #'as yet unclassified' }
@@ -82,6 +101,14 @@ PBPropertySlot >> initialize [
 	jsonOmitEmpty := false.
 ]
 
+{ #category : #'selector-creation' }
+PBPropertySlot >> installingIn: aClass [
+	"Make sure encodingType is valid."
+	self resolveEncodingType.
+	"Delegate to the type for the right kind of selector!"
+	encodingType installingIn: aClass for: self.
+]
+
 { #category : #accessing }
 PBPropertySlot >> jsonFieldName: aName [
 	jsonFieldName := aName
@@ -106,13 +133,20 @@ PBPropertySlot >> optional [
 	^ optional
 ]
 
+{ #category : #'as yet unclassified' }
+PBPropertySlot >> pharoFieldName [
+	"fieldName modified to follow a Pharo style."
+	self flag: #todo.  "TODO(zecke): Figure out if we want to adopt a camelcase policy"
+	^fieldName
+]
+
 { #category : #printing }
 PBPropertySlot >> printOn: aStream [
 	aStream 
 		store: self name;
-		nextPutAll: ' => (';
-		nextPutAll: encodingType typeName;
-		nextPutAll: ' asSlot fieldName: '''; nextPutAll: fieldName;
+		nextPutAll: ' => ((PBPropertySlot with: #';
+		nextPutAll: self encodingTypeName;
+		nextPutAll: ') fieldName: '''; nextPutAll: fieldName;
 		nextPutAll: '''; fieldNumber: ';
 		nextPutAll: fieldNumber displayString.
 	optional ifTrue: [
@@ -148,4 +182,19 @@ PBPropertySlot >> printOn: aStream [
 { #category : #'as yet unclassified' }
 PBPropertySlot >> repeated [
 	^ repeated
+]
+
+{ #category : #'selector-creation' }
+PBPropertySlot >> resolveEncodingType [
+	"There might not be an encodingType or the PRRepeatedType might not have the
+	right type resolved (e.g. a class is loaded before a dependency was loaded).
+	Here we will resolve the final typeName."
+	self flag: #todo.  "TODO(zecke): What if it can't be resolved? Can we avoid
+	hardcoding this for repeated?"
+
+	encodingType ifNil: [
+		encodingType := self class environment at: encodingTypeName].
+	repeated ifTrue: [
+		encodingType baseType: (self class environment at: encodingTypeName).
+	].
 ]

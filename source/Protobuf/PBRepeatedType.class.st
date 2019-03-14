@@ -15,8 +15,8 @@ PBRepeatedType class >> initWith: aType [
 ]
 
 { #category : #'as yet unclassified' }
-PBRepeatedType >> baseType: aClass [ 
-	baseType := aClass
+PBRepeatedType >> baseType: aClassOrName [
+	baseType := aClassOrName
 ]
 
 { #category : #'as yet unclassified' }
@@ -28,6 +28,35 @@ PBRepeatedType >> decodeFrom: aValue instVarIndex: anIndex to: anInstance [
 		coll := OrderedCollection new.
 		thisContext object: anInstance  instVarAt: anIndex put: coll].
 	coll add: (baseType unmarshalFrom: aValue).
+]
+
+{ #category : #'as yet unclassified' }
+PBRepeatedType >> installingIn: aClass for: aSlot [ 
+	| reader writer | 
+	
+	"Lazily initialize the collection. Call it mutable_.._s?"
+	reader := String streamContents: [ :str |
+		str 
+			nextPutAll: aSlot pharoFieldName; nextPutAll: 's';
+			cr;tab;
+			nextPutAll: ' ^';
+			nextPutAll: aSlot pharoFieldName;
+			nextPutAll: ' ifNil: [ ';
+			nextPutAll: aSlot pharoFieldName;
+			nextPutAll: ' := OrderedCollection new ]'.
+		 ].
+	"Add an element"
+	writer := String streamContents: [ :str |
+		str 
+			nextPutAll: 'add_'; nextPutAll: aSlot pharoFieldName;
+			nextPutAll: ': anObject';
+			cr;tab;
+			nextPutAll: 'self ';
+			nextPutAll: aSlot pharoFieldName;
+			nextPutAll: 's add: anObject.'
+		].
+	aClass compile: reader classified: 'accessing'.
+	aClass compile: writer classified: 'accessing'.
 ]
 
 { #category : #'as yet unclassified' }
