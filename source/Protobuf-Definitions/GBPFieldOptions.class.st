@@ -2,7 +2,7 @@ Class {
 	#name : #GBPFieldOptions,
 	#superclass : #PBTypeMessage,
 	#instVars : [
-		'#packed => ((PBPropertySlot with: #PBTypeBool) fieldName: \'packaged\'; fieldNumber: 2; beOptional)',
+		'#packed => ((PBPropertySlot with: #PBTypeBool) fieldName: \'packed\'; fieldNumber: 2; beOptional)',
 		'#deprecated => ((PBPropertySlot with: #PBTypeBool) fieldName: \'deprecated\'; fieldNumber: 3; beOptional; defaultValue: false)'
 	],
 	#category : #'Protobuf-Definitions'
@@ -19,11 +19,11 @@ GBPFieldOptions >> deprecated: anObject [
 ]
 
 { #category : #accessing }
-GBPFieldOptions >> packaged [
-	 ^packaged
+GBPFieldOptions >> packed [
+	 ^packed
 ]
 
 { #category : #accessing }
-GBPFieldOptions >> packaged: anObject [
-	packaged:= anObject.
+GBPFieldOptions >> packed: anObject [
+	packed:= anObject.
 ]
