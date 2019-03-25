@@ -4,9 +4,10 @@ Class {
 	#instVars : [
 		'#name => ((PBPropertySlot with: #PBTypeString) fieldName: \'name\'; fieldNumber: 1; beOptional)',
 		'#field => ((PBPropertySlot with: #GBPFieldDescriptorProto) fieldName: \'field\'; fieldNumber: 2; beRepeated)',
-		'#extension => ((PBPropertySlot with: #GBPFieldDescriptorProto) fieldName: \'extension\'; fieldNumber: 3; beRepeated)',
+		'#nested_type => ((PBPropertySlot with: #GBPDescriptorProto) fieldName: \'nested_type\'; fieldNumber: 3; beRepeated)',
 		'#enum_type => ((PBPropertySlot with: #GBPEnumDescriptorProto) fieldName: \'enum_type\'; fieldNumber: 4; beRepeated)',
 		'#extension_range => ((PBPropertySlot with: #GBPDescriptorProto_ExtensionRange) fieldName: \'extension_range\'; fieldNumber: 5; beRepeated)',
+		'#extension => ((PBPropertySlot with: #GBPFieldDescriptorProto) fieldName: \'extension\'; fieldNumber: 6; beRepeated)',
 		'#reserved_range => ((PBPropertySlot with: #GBPDescriptorProto_ReservedRange) fieldName: \'reserved_range\'; fieldNumber: 9; beRepeated)'
 	],
 	#category : #'Protobuf-Definitions'
@@ -30,6 +31,11 @@ GBPDescriptorProto >> add_extension_range: anObject [
 { #category : #accessing }
 GBPDescriptorProto >> add_field: anObject [
 	self fields add: anObject.
+]
+
+{ #category : #accessing }
+GBPDescriptorProto >> add_nested_type: anObject [
+	self nested_types add: anObject.
 ]
 
 { #category : #accessing }
@@ -65,6 +71,11 @@ GBPDescriptorProto >> name [
 { #category : #accessing }
 GBPDescriptorProto >> name: anObject [
 	name:= anObject.
+]
+
+{ #category : #accessing }
+GBPDescriptorProto >> nested_types [
+	 ^nested_type ifNil: [ nested_type := OrderedCollection new ]
 ]
 
 { #category : #accessing }
