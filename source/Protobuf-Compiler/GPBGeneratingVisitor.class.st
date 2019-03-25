@@ -136,8 +136,8 @@ GPBGeneratingVisitor >> visitEnumDescriptorProto: aGPBEnumDescriptorProto [
 GPBGeneratingVisitor >> visitFieldDescriptorProto: aField [
 	| slot |
 	slot := PBPropertySlot new.
-	slot fieldName: aField name.
-	slot name: aField name.
+	slot fieldName: aField name asSymbol.
+	slot name: aField name asSymbol.
 	slot jsonFieldName: aField json_name.
 	slot defaultValue: aField default_value.
 	slot fieldNumber: aField number.

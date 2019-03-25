@@ -26,7 +26,8 @@ GPBFileDescriptorSetTest >> test_materializeFrom_smokeTest_okay [
 	a := GPBFileDescriptorSet
 		materializeFrom: self class fullDescriptor readStream.
 	b := GPBTypeNamesVisitor new.
-	c := GPBGeneratingVisitor new typeNames: b; customPrefix: 'Hack_'; targetPackage: 'Protobuf-Hacks'.
+	c := GPBGeneratingVisitor new typeNames: b; customPrefix: 'Hack_'; targetPackage: 'Protobuf-Definitions'.
 	a visit: b.
 	a visit: c.
+	PBTypeMessage allSubclassesDo: [:each | each slots do: #resolveEncodingType ].
 ]

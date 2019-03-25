@@ -2,13 +2,16 @@ Class {
 	#name : #GPBDescriptorProto,
 	#superclass : #PBTypeMessage,
 	#instVars : [
-		'#name => ((PBPropertySlot with: #PBTypeString) fieldName: \'name\'; fieldNumber: 1; beOptional)',
-		'#field => ((PBPropertySlot with: #GPBFieldDescriptorProto) fieldName: \'field\'; fieldNumber: 2; beRepeated)',
-		'#nested_type => ((PBPropertySlot with: #GPBDescriptorProto) fieldName: \'nested_type\'; fieldNumber: 3; beRepeated)',
-		'#enum_type => ((PBPropertySlot with: #GPBEnumDescriptorProto) fieldName: \'enum_type\'; fieldNumber: 4; beRepeated)',
-		'#extension_range => ((PBPropertySlot with: #GPBDescriptorProto_ExtensionRange) fieldName: \'extension_range\'; fieldNumber: 5; beRepeated)',
-		'#extension => ((PBPropertySlot with: #GPBFieldDescriptorProto) fieldName: \'extension\'; fieldNumber: 6; beRepeated)',
-		'#reserved_range => ((PBPropertySlot with: #GPBDescriptorProto_ReservedRange) fieldName: \'reserved_range\'; fieldNumber: 9; beRepeated)'
+		'#name => ((PBPropertySlot with: #PBTypeString) fieldName: \'name\'; fieldNumber: 1; beOptional; jsonFieldName: \'name\')',
+		'#field => ((PBPropertySlot with: #GPBFieldDescriptorProto) fieldName: \'field\'; fieldNumber: 2; beRepeated; jsonFieldName: \'field\')',
+		'#extension => ((PBPropertySlot with: #GPBFieldDescriptorProto) fieldName: \'extension\'; fieldNumber: 6; beRepeated; jsonFieldName: \'extension\')',
+		'#nested_type => ((PBPropertySlot with: #GPBDescriptorProto) fieldName: \'nested_type\'; fieldNumber: 3; beRepeated; jsonFieldName: \'nestedType\')',
+		'#enum_type => ((PBPropertySlot with: #GPBEnumDescriptorProto) fieldName: \'enum_type\'; fieldNumber: 4; beRepeated; jsonFieldName: \'enumType\')',
+		'#extension_range => ((PBPropertySlot with: #GPBDescriptorProto_ExtensionRange) fieldName: \'extension_range\'; fieldNumber: 5; beRepeated; jsonFieldName: \'extensionRange\')',
+		'#oneof_decl => ((PBPropertySlot with: #GPBOneofDescriptorProto) fieldName: \'oneof_decl\'; fieldNumber: 8; beRepeated; jsonFieldName: \'oneofDecl\')',
+		'#options => ((PBPropertySlot with: #GPBMessageOptions) fieldName: \'options\'; fieldNumber: 7; beOptional; jsonFieldName: \'options\')',
+		'#reserved_range => ((PBPropertySlot with: #GPBDescriptorProto_ReservedRange) fieldName: \'reserved_range\'; fieldNumber: 9; beRepeated; jsonFieldName: \'reservedRange\')',
+		'#reserved_name => ((PBPropertySlot with: #PBTypeString) fieldName: \'reserved_name\'; fieldNumber: 10; beRepeated; jsonFieldName: \'reservedName\')'
 	],
 	#category : #'Protobuf-Definitions'
 }

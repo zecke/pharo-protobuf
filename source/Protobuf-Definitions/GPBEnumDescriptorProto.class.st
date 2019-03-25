@@ -2,8 +2,11 @@ Class {
 	#name : #GPBEnumDescriptorProto,
 	#superclass : #PBTypeMessage,
 	#instVars : [
-		'#name => ((PBPropertySlot with: #PBTypeString) fieldName: \'name\'; fieldNumber: 1; beOptional)',
-		'#value => ((PBPropertySlot with: #GPBEnumValueDescriptorProto) fieldName: \'value\'; fieldNumber: 2; beRepeated)'
+		'#name => ((PBPropertySlot with: #PBTypeString) fieldName: \'name\'; fieldNumber: 1; beOptional; jsonFieldName: \'name\')',
+		'#value => ((PBPropertySlot with: #GPBEnumValueDescriptorProto) fieldName: \'value\'; fieldNumber: 2; beRepeated; jsonFieldName: \'value\')',
+		'#options => ((PBPropertySlot with: #GPBEnumOptions) fieldName: \'options\'; fieldNumber: 3; beOptional; jsonFieldName: \'options\')',
+		'#reserved_range => ((PBPropertySlot with: #GPBEnumDescriptorProto_EnumReservedRange) fieldName: \'reserved_range\'; fieldNumber: 4; beRepeated; jsonFieldName: \'reservedRange\')',
+		'#reserved_name => ((PBPropertySlot with: #PBTypeString) fieldName: \'reserved_name\'; fieldNumber: 5; beRepeated; jsonFieldName: \'reservedName\')'
 	],
 	#category : #'Protobuf-Definitions'
 }

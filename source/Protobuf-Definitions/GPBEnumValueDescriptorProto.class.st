@@ -2,8 +2,9 @@ Class {
 	#name : #GPBEnumValueDescriptorProto,
 	#superclass : #PBTypeMessage,
 	#instVars : [
-		'#name => ((PBPropertySlot with: #PBTypeString) fieldName: \'name\'; fieldNumber: 1; beOptional)',
-		'#number => ((PBPropertySlot with: #PBTypeInt32) fieldName: \'number\'; fieldNumber: 2; beOptional)'
+		'#name => ((PBPropertySlot with: #PBTypeString) fieldName: \'name\'; fieldNumber: 1; beOptional; jsonFieldName: \'name\')',
+		'#number => ((PBPropertySlot with: #PBTypeInt32) fieldName: \'number\'; fieldNumber: 2; beOptional; jsonFieldName: \'number\')',
+		'#options => ((PBPropertySlot with: #GPBEnumValueOptions) fieldName: \'options\'; fieldNumber: 3; beOptional; jsonFieldName: \'options\')'
 	],
 	#category : #'Protobuf-Definitions'
 }
