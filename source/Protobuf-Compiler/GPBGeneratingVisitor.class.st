@@ -44,7 +44,7 @@ GPBGeneratingVisitor >> initialize [
 
 { #category : #'as yet unclassified' }
 GPBGeneratingVisitor >> pushDescriptor: aGPBDescriptorProto during: aBlockClosure [
-	| className protoName |
+	| className protoName protoClass |
 	protoName := self buildName: aGPBDescriptorProto name.
 	className := self typeForName: protoName.
 
@@ -53,12 +53,13 @@ GPBGeneratingVisitor >> pushDescriptor: aGPBDescriptorProto during: aBlockClosur
 
 	"Build the class"
 	self flag: #TODO. "Pick different base class if there is a 'default' value or not."
-	Smalltalk classInstaller make: [:classBuilder |
+	protoClass := Smalltalk classInstaller make: [:classBuilder |
 		classBuilder
 			superclass: PBTypeMessage;
 			name: className;
 			slots: descriptorStack top slots;
 			category: targetPackage].
+	protoClass resolveEncodingType.
 	descriptorStack pop.
 ]
 

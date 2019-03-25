@@ -9,6 +9,8 @@ BaselineOfProtobuf >> baseline: spec [
 	<baseline>
 	spec for: #'common' do: [
 		spec
+			postLoadDoIt: #'postload:package:'.
+		spec
 			package: 'Protobuf';
 			package: 'Protobuf-Tests' with: [ spec requires: #('Protobuf') ];
 			package: 'Protobuf-Definitions' with: [ spec requires: #('Protobuf') ].
@@ -17,4 +19,9 @@ BaselineOfProtobuf >> baseline: spec [
 			group: 'Core' with: 'Protobuf';
 			group: 'Tests' with: 'Protobuf-Tests';
 			group: 'Definitions' with: 'Protobuf-Definitions']
+]
+
+{ #category : #baselines }
+BaselineOfProtobuf >> postload: loader package: packageSpec [
+	PBTypeMessage allSubclasses do: #resolveEncodingType.
 ]
