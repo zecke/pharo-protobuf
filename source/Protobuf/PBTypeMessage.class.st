@@ -21,6 +21,11 @@ PBTypeMessage class >> materializeFrom: aReadStream [
 ]
 
 { #category : #'as yet unclassified' }
+PBTypeMessage class >> resolveEncodingType [
+	self slots do: #resolveEncodingType
+]
+
+{ #category : #'as yet unclassified' }
 PBTypeMessage class >> unmarshalFrom: aByteArray [ 
 	^self materializeFrom: aByteArray readStream
 ]

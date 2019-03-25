@@ -2,7 +2,6 @@ Class {
 	#name : #PBPropertySlot,
 	#superclass : #InstanceVariableSlot,
 	#instVars : [
-		'encodingType',
 		'fieldName',
 		'jsonFieldName',
 		'jsonOmitEmpty',
@@ -10,7 +9,8 @@ Class {
 		'optional',
 		'repeated',
 		'fieldNumber',
-		'encodingTypeName'
+		'encodingTypeName',
+		'resolvedEncodingType'
 	],
 	#category : #'Protobuf-Slots'
 }
@@ -28,14 +28,12 @@ PBPropertySlot >> beOptional [
 { #category : #accessing }
 PBPropertySlot >> beRepeated [
 	repeated := true.
-	encodingType := PBRepeatedType initWith: encodingType. 
+	resolvedEncodingType := PBRepeatedType initWith: encodingTypeName. 
 ]
 
 { #category : #'as yet unclassified' }
-PBPropertySlot >> decodeFrom: aValue to: anInstance [ 
-	self flag: #todo. "TODO(zecke): Make this a subclass to distinguish repeated from flat or have
-	encodingType that is instance based and repeated?"
-	encodingType decodeFrom: aValue instVarIndex: index to: anInstance.
+PBPropertySlot >> decodeFrom: aValue to: anInstance [
+	resolvedEncodingType decodeFrom: aValue instVarIndex: index to: anInstance.
 ]
 
 { #category : #accessing }
@@ -43,22 +41,15 @@ PBPropertySlot >> defaultValue: aValue [
 	defaultValue := aValue
 ]
 
-{ #category : #accessing }
-PBPropertySlot >> encodingType: aType [
-	"Either a class like PBTypeBool or subclasses based on PBTypeEnum and PBTypeMessage."
-	encodingType := aType.
-	encodingTypeName := aType typeName.
-]
-
 { #category : #'as yet unclassified' }
 PBPropertySlot >> encodingTypeName [
-	^ encodingTypeName ifNil: [ encodingType typeName ]
+	^ encodingTypeName ifNil: [ resolvedEncodingType typeName ]
 ]
 
 { #category : #accessing }
 PBPropertySlot >> encodingTypeName: aTypeName [
-	"Either a class like PBTypeBool or subclasses based on PBTypeEnum and PBTypeMessage."
-	encodingType := nil.
+	"Either a symbol PBTypeBool or subclasses based on PBTypeEnum and PBTypeMessage."
+	resolvedEncodingType := nil.
 	encodingTypeName := aTypeName.
 ]
 
@@ -101,14 +92,6 @@ PBPropertySlot >> initialize [
 	jsonOmitEmpty := false.
 ]
 
-{ #category : #'selector-creation' }
-PBPropertySlot >> installingIn: aClass [
-	"Make sure encodingType is valid."
-	self resolveEncodingType.
-	"Delegate to the type for the right kind of selector!"
-	encodingType installingIn: aClass for: self.
-]
-
 { #category : #accessing }
 PBPropertySlot >> jsonFieldName: aName [
 	jsonFieldName := aName
@@ -122,10 +105,10 @@ PBPropertySlot >> jsonOmitEmtpy: aBoolean [
 { #category : #'as yet unclassified' }
 PBPropertySlot >> materialize: anObject to: aStream [
 	| val |
-	self flag: #TODO. "Skip optional entries that are 0"
+	self flag: #TODO. "Skip optional entries that are 0/have default value"
 	val := thisContext object: anObject instVarAt: index.
 	(val isNil & (optional | repeated)) ifTrue: [ ^self ].
-	encodingType marshal: val to: aStream with: self.
+	resolvedEncodingType marshal: val to: aStream with: self.
 ]
 
 { #category : #'as yet unclassified' }
@@ -186,15 +169,8 @@ PBPropertySlot >> repeated [
 
 { #category : #'selector-creation' }
 PBPropertySlot >> resolveEncodingType [
-	"There might not be an encodingType or the PRRepeatedType might not have the
-	right type resolved (e.g. a class is loaded before a dependency was loaded).
-	Here we will resolve the final typeName."
-	self flag: #todo.  "TODO(zecke): What if it can't be resolved? Can we avoid
-	hardcoding this for repeated?"
-
-	encodingType ifNil: [
-		encodingType := self class environment at: encodingTypeName].
-	repeated ifTrue: [
-		encodingType baseType: (self class environment at: encodingTypeName).
-	].
+	"We are loading types in a random order but need to resolve them at load."
+	resolvedEncodingType ifNil: [
+		resolvedEncodingType := self class environment at: encodingTypeName.].
+	resolvedEncodingType resolveEncodingType.
 ]

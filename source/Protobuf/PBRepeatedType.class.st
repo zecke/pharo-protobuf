@@ -2,21 +2,22 @@ Class {
 	#name : #PBRepeatedType,
 	#superclass : #Object,
 	#instVars : [
-		'baseType'
+		'baseTypeName',
+		'resolvedEncodingType'
 	],
 	#category : #'Protobuf-Slots'
 }
 
 { #category : #'as yet unclassified' }
-PBRepeatedType class >> initWith: aType [ 
+PBRepeatedType class >> initWith: aTypeName [
 	^self new
-		baseType: aType;
+		baseTypeName: aTypeName;
 		yourself
 ]
 
-{ #category : #'as yet unclassified' }
-PBRepeatedType >> baseType: aClassOrName [
-	baseType := aClassOrName
+{ #category : #accessing }
+PBRepeatedType >> baseTypeName: aTypeName [
+	baseTypeName := aTypeName
 ]
 
 { #category : #'as yet unclassified' }
@@ -27,7 +28,7 @@ PBRepeatedType >> decodeFrom: aValue instVarIndex: anIndex to: anInstance [
 	coll ifNil: [
 		coll := OrderedCollection new.
 		thisContext object: anInstance  instVarAt: anIndex put: coll].
-	coll add: (baseType unmarshalFrom: aValue).
+	coll add: (resolvedEncodingType unmarshalFrom: aValue).
 ]
 
 { #category : #'as yet unclassified' }
@@ -63,10 +64,15 @@ PBRepeatedType >> installingIn: aClass for: aSlot [
 PBRepeatedType >> marshal: aValue to: anEncoder with: aSlot [
 	self flag: #TODO. "In proto3 there is an optimized repeated field. Use that?"
 	aValue do: [:each |
-		baseType marshal: each to: anEncoder with: aSlot].
+		resolvedEncodingType marshal: each to: anEncoder with: aSlot].
+]
+
+{ #category : #accessing }
+PBRepeatedType >> resolveEncodingType [
+	resolvedEncodingType := self class environment at: baseTypeName.
 ]
 
 { #category : #'as yet unclassified' }
 PBRepeatedType >> typeName [
-	^baseType typeName
+	^baseTypeName
 ]

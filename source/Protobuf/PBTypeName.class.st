@@ -9,13 +9,6 @@ Class {
 	#category : #'Protobuf-Slots'
 }
 
-{ #category : #converting }
-PBTypeName class >> asSlot [
-	^PBPropertySlot new
-		encodingType: self;
-		yourself
-]
-
 { #category : #'as yet unclassified' }
 PBTypeName class >> decodeFrom: aValue instVarIndex: anIndex to: anInstance [ 
 	thisContext object: anInstance instVarAt: anIndex put: (self unmarshalFrom: aValue).
@@ -42,6 +35,11 @@ PBTypeName class >> installingIn: aClass for: aSlot [
 		].
 	aClass compile: reader classified: 'accessing'.
 	aClass compile: writer classified: 'accessing'.
+]
+
+{ #category : #converting }
+PBTypeName class >> resolveEncodingType [
+	"nothing"
 ]
 
 { #category : #'as yet unclassified' }

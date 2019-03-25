@@ -2,9 +2,9 @@ Class {
 	#name : #PBTestMessage,
 	#superclass : #PBTypeMessage,
 	#instVars : [
-		'#color => (PBTestEnumColor asSlot fieldName: \'color\'; fieldNumber: 1)',
-		'#dont_set => (PBTypeInt32 asSlot fieldName: \'dont_set\'; fieldNumber: 2; beOptional)',
-		'#other_colors => (PBTypeDouble asSlot fieldName: \'other_colors\'; fieldNumber: 3; beRepeated)'
+		'#color => ((PBPropertySlot with: #PBTestEnumColor) fieldName: \'color\'; fieldNumber: 1)',
+		'#dont_set => ((PBPropertySlot with: #PBTypeInt32) fieldName: \'dont_set\'; fieldNumber: 2; beOptional)',
+		'#other_colors => ((PBPropertySlot with: #PBTypeDouble) fieldName: \'other_colors\'; fieldNumber: 3; beRepeated)'
 	],
 	#category : #'Protobuf-Tests'
 }
