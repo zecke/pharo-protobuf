@@ -34,9 +34,9 @@ GPBTypeNamesVisitor >> typeNamed: aString [
 ]
 
 { #category : #'as yet unclassified' }
-GPBTypeNamesVisitor >> visitDescriptorProto: aGBPDescriptorProto [
+GPBTypeNamesVisitor >> visitDescriptorProto: aGPBDescriptorProto [
 	| protoTypeName baseName messageName |
-	protoTypeName := aGBPDescriptorProto name.
+	protoTypeName := aGPBDescriptorProto name.
 	baseName := self currentBaseName.
 	baseName
 		ifNil: [
@@ -49,29 +49,29 @@ GPBTypeNamesVisitor >> visitDescriptorProto: aGBPDescriptorProto [
 	protoTypeNames push: protoTypeName.
 	
 	typeNames at: baseName, '.', protoTypeName put: messageName asSymbol.
-	super visitDescriptorProto: aGBPDescriptorProto.
+	super visitDescriptorProto: aGPBDescriptorProto.
 	protoTypeNames pop.
 ]
 
 { #category : #'as yet unclassified' }
-GPBTypeNamesVisitor >> visitEnumDescriptorProto: aGBPEnumDescriptorProto [
+GPBTypeNamesVisitor >> visitEnumDescriptorProto: aGPBEnumDescriptorProto [
 	| baseName enumName |
 	baseName := self currentBaseName.
 	baseName
 		ifNil: [
 			"This is a free standing enum"
-			enumName := protoClassPrefix, aGBPEnumDescriptorProto name.
+			enumName := protoClassPrefix, aGPBEnumDescriptorProto name.
 			baseName := protoPackageName]
 		ifNotNil: [
-			enumName := (typeNames at: baseName), '_', aGBPEnumDescriptorProto name.].
+			enumName := (typeNames at: baseName), '_', aGPBEnumDescriptorProto name.].
 
-	typeNames at: baseName, '.', aGBPEnumDescriptorProto name put: enumName asSymbol.
-	super visitEnumDescriptorProto: aGBPEnumDescriptorProto.
+	typeNames at: baseName, '.', aGPBEnumDescriptorProto name put: enumName asSymbol.
+	super visitEnumDescriptorProto: aGPBEnumDescriptorProto.
 ]
 
 { #category : #'as yet unclassified' }
-GPBTypeNamesVisitor >> visitFileDescriptorProto: aGBPFileDescriptorProto [
-	protoPackageName := aGBPFileDescriptorProto package.
-	protoClassPrefix := aGBPFileDescriptorProto options objc_class_prefix.
-	super visitFileDescriptorProto: aGBPFileDescriptorProto
+GPBTypeNamesVisitor >> visitFileDescriptorProto: aGPBFileDescriptorProto [
+	protoPackageName := aGPBFileDescriptorProto package.
+	protoClassPrefix := aGPBFileDescriptorProto options objc_class_prefix.
+	super visitFileDescriptorProto: aGPBFileDescriptorProto
 ]

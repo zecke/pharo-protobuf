@@ -9,8 +9,8 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-GPBCurrentDescriptor class >> with: aGBPDescriptorProto [ 
-	^self new descriptor: aGBPDescriptorProto
+GPBCurrentDescriptor class >> with: aGPBDescriptorProto [ 
+	^self new descriptor: aGPBDescriptorProto
 ]
 
 { #category : #'as yet unclassified' }

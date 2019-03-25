@@ -5,39 +5,39 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-GPBVisitorBase >> visitDescriptorProto: aGBPDescriptorProto [
-	aGBPDescriptorProto enum_types do: [:each | each visit: self ].
-	aGBPDescriptorProto nested_types do: [:each | each visit: self ].
-	aGBPDescriptorProto extension_ranges do: [:each | each visit: self ].
-	aGBPDescriptorProto extensions do: [:each | each visit: self ].
-	aGBPDescriptorProto fields do: [:each | each visit: self ].
+GPBVisitorBase >> visitDescriptorProto: aGPBDescriptorProto [
+	aGPBDescriptorProto enum_types do: [:each | each visit: self ].
+	aGPBDescriptorProto nested_types do: [:each | each visit: self ].
+	aGPBDescriptorProto extension_ranges do: [:each | each visit: self ].
+	aGPBDescriptorProto extensions do: [:each | each visit: self ].
+	aGPBDescriptorProto fields do: [:each | each visit: self ].
 ]
 
 { #category : #'as yet unclassified' }
-GPBVisitorBase >> visitEnumDescriptorProto: aGBPEnumDescriptorProto [ 
-	aGBPEnumDescriptorProto values do: [:each | each visit: self ].
+GPBVisitorBase >> visitEnumDescriptorProto: aGPBEnumDescriptorProto [ 
+	aGPBEnumDescriptorProto values do: [:each | each visit: self ].
 ]
 
 { #category : #'as yet unclassified' }
-GPBVisitorBase >> visitEnumValueDescriptorProto: aGBPEnumValueDescriptorProto [
+GPBVisitorBase >> visitEnumValueDescriptorProto: aGPBEnumValueDescriptorProto [
 ]
 
 { #category : #'as yet unclassified' }
-GPBVisitorBase >> visitFieldDescriptorProto: aGBPFieldDescriptorProto [ 
+GPBVisitorBase >> visitFieldDescriptorProto: aGPBFieldDescriptorProto [ 
 
 ]
 
 { #category : #'as yet unclassified' }
-GPBVisitorBase >> visitFileDescriptorProto: aGBPFileDescriptorProto [ 
-	aGBPFileDescriptorProto message_types do: [:each | each visit: self ].
+GPBVisitorBase >> visitFileDescriptorProto: aGPBFileDescriptorProto [ 
+	aGPBFileDescriptorProto message_types do: [:each | each visit: self ].
 ]
 
 { #category : #'as yet unclassified' }
-GPBVisitorBase >> visitFileDescriptorSet: aGBPFileDescriptorSet [
-	aGBPFileDescriptorSet files do: [:each | each visit: self ].
+GPBVisitorBase >> visitFileDescriptorSet: aGPBFileDescriptorSet [
+	aGPBFileDescriptorSet files do: [:each | each visit: self ].
 ]
 
 { #category : #'as yet unclassified' }
-GPBVisitorBase >> visitProtoExtensionRange: aGBPDescriptorProto_ExtensionRange [ 
+GPBVisitorBase >> visitProtoExtensionRange: aGPBDescriptorProto_ExtensionRange [ 
 
 ]

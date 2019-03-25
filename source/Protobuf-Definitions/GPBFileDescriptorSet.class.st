@@ -1,18 +1,18 @@
 Class {
-	#name : #GBPFileDescriptorSet,
+	#name : #GPBFileDescriptorSet,
 	#superclass : #PBTypeMessage,
 	#instVars : [
-		'#file => ((PBPropertySlot with: #GBPFileDescriptorProto) fieldName: \'file\'; fieldNumber: 1; beRepeated)'
+		'#file => ((PBPropertySlot with: #GPBFileDescriptorProto) fieldName: \'file\'; fieldNumber: 1; beRepeated)'
 	],
 	#category : #'Protobuf-Definitions'
 }
 
 { #category : #accessing }
-GBPFileDescriptorSet >> add_file: anObject [
+GPBFileDescriptorSet >> add_file: anObject [
 	self files add: anObject.
 ]
 
 { #category : #accessing }
-GBPFileDescriptorSet >> files [
+GPBFileDescriptorSet >> files [
 	 ^file ifNil: [ file := OrderedCollection new ]
 ]

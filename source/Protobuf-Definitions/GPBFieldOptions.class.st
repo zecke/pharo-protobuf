@@ -1,5 +1,5 @@
 Class {
-	#name : #GBPFieldOptions,
+	#name : #GPBFieldOptions,
 	#superclass : #PBTypeMessage,
 	#instVars : [
 		'#packed => ((PBPropertySlot with: #PBTypeBool) fieldName: \'packed\'; fieldNumber: 2; beOptional)',
@@ -9,21 +9,21 @@ Class {
 }
 
 { #category : #accessing }
-GBPFieldOptions >> deprecated [
+GPBFieldOptions >> deprecated [
 	 ^deprecated
 ]
 
 { #category : #accessing }
-GBPFieldOptions >> deprecated: anObject [
+GPBFieldOptions >> deprecated: anObject [
 	deprecated:= anObject.
 ]
 
 { #category : #accessing }
-GBPFieldOptions >> packed [
+GPBFieldOptions >> packed [
 	 ^packed
 ]
 
 { #category : #accessing }
-GBPFieldOptions >> packed: anObject [
+GPBFieldOptions >> packed: anObject [
 	packed:= anObject.
 ]

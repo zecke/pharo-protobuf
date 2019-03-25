@@ -1,5 +1,5 @@
 Class {
-	#name : #'GBPDescriptorProto_ReservedRange',
+	#name : #'GPBDescriptorProto_ReservedRange',
 	#superclass : #PBTypeMessage,
 	#instVars : [
 		'#start => ((PBPropertySlot with: #PBTypeInt32) fieldName: \'start\'; fieldNumber: 1; beOptional)',
@@ -9,21 +9,21 @@ Class {
 }
 
 { #category : #accessing }
-GBPDescriptorProto_ReservedRange >> end [
+GPBDescriptorProto_ReservedRange >> end [
 	 ^end
 ]
 
 { #category : #accessing }
-GBPDescriptorProto_ReservedRange >> end: anObject [
+GPBDescriptorProto_ReservedRange >> end: anObject [
 	end:= anObject.
 ]
 
 { #category : #accessing }
-GBPDescriptorProto_ReservedRange >> start [
+GPBDescriptorProto_ReservedRange >> start [
 	 ^start
 ]
 
 { #category : #accessing }
-GBPDescriptorProto_ReservedRange >> start: anObject [
+GPBDescriptorProto_ReservedRange >> start: anObject [
 	start:= anObject.
 ]

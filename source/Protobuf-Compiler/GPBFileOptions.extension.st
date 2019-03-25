@@ -1,6 +1,6 @@
-Extension { #name : #GBPFileOptions }
+Extension { #name : #GPBFileOptions }
 
 { #category : #'*Protobuf-Compiler' }
-GBPFileOptions >> visit: aVisitor [
+GPBFileOptions >> visit: aVisitor [
 	aVisitor visitFileOptions: self
 ]

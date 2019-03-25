@@ -1,5 +1,5 @@
 Class {
-	#name : #'GBPFieldDescriptorProto_Type',
+	#name : #'GPBFieldDescriptorProto_Type',
 	#superclass : #PBTypeEnum,
 	#category : #'Protobuf-Definitions'
 }

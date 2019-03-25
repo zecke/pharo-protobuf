@@ -1,5 +1,5 @@
 Class {
-	#name : #GBPEnumValueDescriptorProto,
+	#name : #GPBEnumValueDescriptorProto,
 	#superclass : #PBTypeMessage,
 	#instVars : [
 		'#name => ((PBPropertySlot with: #PBTypeString) fieldName: \'name\'; fieldNumber: 1; beOptional)',
@@ -9,21 +9,21 @@ Class {
 }
 
 { #category : #accessing }
-GBPEnumValueDescriptorProto >> name [
+GPBEnumValueDescriptorProto >> name [
 	 ^name
 ]
 
 { #category : #accessing }
-GBPEnumValueDescriptorProto >> name: anObject [
+GPBEnumValueDescriptorProto >> name: anObject [
 	name:= anObject.
 ]
 
 { #category : #accessing }
-GBPEnumValueDescriptorProto >> number [
+GPBEnumValueDescriptorProto >> number [
 	 ^number
 ]
 
 { #category : #accessing }
-GBPEnumValueDescriptorProto >> number: anObject [
+GPBEnumValueDescriptorProto >> number: anObject [
 	number:= anObject.
 ]

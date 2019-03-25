@@ -43,12 +43,12 @@ GPBGeneratingVisitor >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
-GPBGeneratingVisitor >> pushDescriptor: aGBPDescriptorProto during: aBlockClosure [
+GPBGeneratingVisitor >> pushDescriptor: aGPBDescriptorProto during: aBlockClosure [
 	| className protoName |
-	protoName := self buildName: aGBPDescriptorProto name.
+	protoName := self buildName: aGPBDescriptorProto name.
 	className := self typeForName: protoName.
 
-	descriptorStack push: (GPBCurrentDescriptor with: aGBPDescriptorProto).
+	descriptorStack push: (GPBCurrentDescriptor with: aGPBDescriptorProto).
 	aBlockClosure value.
 
 	"Build the class"
@@ -80,8 +80,8 @@ GPBGeneratingVisitor >> typeForName: aString [
 ]
 
 { #category : #'as yet unclassified' }
-GPBGeneratingVisitor >> typeNames: aGBPTypeNamesVisitor [ 
-	typeNames := aGBPTypeNamesVisitor
+GPBGeneratingVisitor >> typeNames: aGPBTypeNamesVisitor [ 
+	typeNames := aGPBTypeNamesVisitor
 ]
 
 { #category : #'as yet unclassified' }
@@ -93,19 +93,19 @@ GPBGeneratingVisitor >> updateClassPrefix [
 ]
 
 { #category : #'as yet unclassified' }
-GPBGeneratingVisitor >> visitDescriptorProto: aGBPDescriptorProto [
-	self pushDescriptor: aGBPDescriptorProto during: [ 
-		super visitDescriptorProto: aGBPDescriptorProto ].
+GPBGeneratingVisitor >> visitDescriptorProto: aGPBDescriptorProto [
+	self pushDescriptor: aGPBDescriptorProto during: [ 
+		super visitDescriptorProto: aGPBDescriptorProto ].
 ]
 
 { #category : #'as yet unclassified' }
-GPBGeneratingVisitor >> visitEnumDescriptorProto: aGBPEnumDescriptorProto [
+GPBGeneratingVisitor >> visitEnumDescriptorProto: aGPBEnumDescriptorProto [
 	| protoName enumName compiledClass classVariables |
-	protoName := self buildName: aGBPEnumDescriptorProto name.
+	protoName := self buildName: aGPBEnumDescriptorProto name.
 	enumName := self typeForName: protoName.
 
 	"Build the class"
-	classVariables := aGBPEnumDescriptorProto values collect: [:each | each name asSymbol asClassVariable value: each number].
+	classVariables := aGPBEnumDescriptorProto values collect: [:each | each name asSymbol asClassVariable value: each number].
 	compiledClass := Smalltalk classInstaller make: [:classBuilder |
 		classBuilder
 			superclass: PBTypeEnum;
@@ -176,6 +176,6 @@ GPBGeneratingVisitor >> visitFieldDescriptorProto: aField [
 ]
 
 { #category : #'as yet unclassified' }
-GPBGeneratingVisitor >> visitFileDescriptorProto: aGBPFileDescriptorProto [
-	self pushFile: aGBPFileDescriptorProto during: [ super visitFileDescriptorProto: aGBPFileDescriptorProto ].
+GPBGeneratingVisitor >> visitFileDescriptorProto: aGPBFileDescriptorProto [
+	self pushFile: aGPBFileDescriptorProto during: [ super visitFileDescriptorProto: aGPBFileDescriptorProto ].
 ]

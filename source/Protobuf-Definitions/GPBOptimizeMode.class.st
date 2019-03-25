@@ -1,5 +1,5 @@
 Class {
-	#name : #'GBPFieldDescriptorProto_Label',
+	#name : #GPBOptimizeMode,
 	#superclass : #PBTypeEnum,
 	#category : #'Protobuf-Definitions'
 }
