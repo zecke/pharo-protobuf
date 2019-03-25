@@ -1,42 +1,43 @@
 Class {
-	#name : #GBPVisitorBase,
+	#name : #GPBVisitorBase,
 	#superclass : #Object,
 	#category : #'Protobuf-Compiler'
 }
 
 { #category : #'as yet unclassified' }
-GBPVisitorBase >> visitDescriptorProto: aGBPDescriptorProto [
+GPBVisitorBase >> visitDescriptorProto: aGBPDescriptorProto [
 	aGBPDescriptorProto enum_types do: [:each | each visit: self ].
+	aGBPDescriptorProto nested_types do: [:each | each visit: self ].
 	aGBPDescriptorProto extension_ranges do: [:each | each visit: self ].
 	aGBPDescriptorProto extensions do: [:each | each visit: self ].
 	aGBPDescriptorProto fields do: [:each | each visit: self ].
 ]
 
 { #category : #'as yet unclassified' }
-GBPVisitorBase >> visitEnumDescriptorProto: aGBPEnumDescriptorProto [ 
+GPBVisitorBase >> visitEnumDescriptorProto: aGBPEnumDescriptorProto [ 
 	aGBPEnumDescriptorProto values do: [:each | each visit: self ].
 ]
 
 { #category : #'as yet unclassified' }
-GBPVisitorBase >> visitEnumValueDescriptorProto: aGBPEnumValueDescriptorProto [
+GPBVisitorBase >> visitEnumValueDescriptorProto: aGBPEnumValueDescriptorProto [
 ]
 
 { #category : #'as yet unclassified' }
-GBPVisitorBase >> visitFieldDescriptorProto: aGBPFieldDescriptorProto [ 
+GPBVisitorBase >> visitFieldDescriptorProto: aGBPFieldDescriptorProto [ 
 
 ]
 
 { #category : #'as yet unclassified' }
-GBPVisitorBase >> visitFileDescriptorProto: aGBPFileDescriptorProto [ 
+GPBVisitorBase >> visitFileDescriptorProto: aGBPFileDescriptorProto [ 
 	aGBPFileDescriptorProto message_types do: [:each | each visit: self ].
 ]
 
 { #category : #'as yet unclassified' }
-GBPVisitorBase >> visitFileDescriptorSet: aGBPFileDescriptorSet [
+GPBVisitorBase >> visitFileDescriptorSet: aGBPFileDescriptorSet [
 	aGBPFileDescriptorSet files do: [:each | each visit: self ].
 ]
 
 { #category : #'as yet unclassified' }
-GBPVisitorBase >> visitProtoExtensionRange: aGBPDescriptorProto_ExtensionRange [ 
+GPBVisitorBase >> visitProtoExtensionRange: aGBPDescriptorProto_ExtensionRange [ 
 
 ]
