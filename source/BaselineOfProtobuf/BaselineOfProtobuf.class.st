@@ -13,11 +13,12 @@ BaselineOfProtobuf >> baseline: spec [
 		spec
 			package: 'Protobuf';
 			package: 'Protobuf-Tests' with: [ spec requires: #('Protobuf') ];
-			package: 'Protobuf-Definitions' with: [ spec requires: #('Protobuf') ].
+			package: 'Protobuf-Definitions' with: [ spec requires: #('Protobuf') ];
+			package: 'Protobuf-Definitions-Tests' with: [ spec requires: #('Protobuf-Definitions') ].
 		spec
 			group: 'default' with: #('Core' 'Tests' 'Definitions');
 			group: 'Core' with: 'Protobuf';
-			group: 'Tests' with: 'Protobuf-Tests';
+			group: 'Tests' with: #('Protobuf-Tests' 'Protobuf-Definitions-Tests');
 			group: 'Definitions' with: 'Protobuf-Definitions']
 ]
 
