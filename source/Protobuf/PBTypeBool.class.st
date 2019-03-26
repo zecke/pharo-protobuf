@@ -10,6 +10,11 @@ PBTypeBool class >> doValidate: anInstance [
 ]
 
 { #category : #'as yet unclassified' }
+PBTypeBool class >> marshal: aBoolean to: anEncoder with: aSlot [
+	anEncoder nextPutVarInt: aBoolean asBit field: aSlot fieldNumber.
+]
+
+{ #category : #'as yet unclassified' }
 PBTypeBool class >> unmarshalFrom: anInteger [ 
 	^anInteger > 0
 ]

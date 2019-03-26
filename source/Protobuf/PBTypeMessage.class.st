@@ -13,6 +13,13 @@ PBTypeMessage class >> fieldNumberToSlotMap [
 	]
 ]
 
+{ #category : #'as yet unclassified' }
+PBTypeMessage class >> marshal: aMessage to: anEncoder with: aSlot [
+	| data |
+	data := aMessage materialize.
+	anEncoder nextPutByteArray: data field: aSlot fieldNumber.
+]
+
 { #category : #materializing }
 PBTypeMessage class >> materializeFrom: aReadStream [
 	^self basicNew

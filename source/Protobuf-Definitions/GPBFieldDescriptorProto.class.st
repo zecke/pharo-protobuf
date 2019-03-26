@@ -3,15 +3,15 @@ Class {
 	#superclass : #PBTypeMessage,
 	#instVars : [
 		'#name => ((PBPropertySlot with: #PBTypeString) fieldName: \'name\'; fieldNumber: 1; beOptional; jsonFieldName: \'name\')',
+		'#extendee => ((PBPropertySlot with: #PBTypeString) fieldName: \'extendee\'; fieldNumber: 2; beOptional; jsonFieldName: \'extendee\')',
 		'#number => ((PBPropertySlot with: #PBTypeInt32) fieldName: \'number\'; fieldNumber: 3; beOptional; jsonFieldName: \'number\')',
 		'#label => ((PBPropertySlot with: #GPBFieldDescriptorProto_Label) fieldName: \'label\'; fieldNumber: 4; beOptional; jsonFieldName: \'label\')',
 		'#type => ((PBPropertySlot with: #GPBFieldDescriptorProto_Type) fieldName: \'type\'; fieldNumber: 5; beOptional; jsonFieldName: \'type\')',
 		'#type_name => ((PBPropertySlot with: #PBTypeString) fieldName: \'type_name\'; fieldNumber: 6; beOptional; jsonFieldName: \'typeName\')',
-		'#extendee => ((PBPropertySlot with: #PBTypeString) fieldName: \'extendee\'; fieldNumber: 2; beOptional; jsonFieldName: \'extendee\')',
 		'#default_value => ((PBPropertySlot with: #PBTypeString) fieldName: \'default_value\'; fieldNumber: 7; beOptional; jsonFieldName: \'defaultValue\')',
+		'#options => ((PBPropertySlot with: #GPBFieldOptions) fieldName: \'options\'; fieldNumber: 8; beOptional; jsonFieldName: \'options\')',
 		'#oneof_index => ((PBPropertySlot with: #PBTypeInt32) fieldName: \'oneof_index\'; fieldNumber: 9; beOptional; jsonFieldName: \'oneofIndex\')',
-		'#json_name => ((PBPropertySlot with: #PBTypeString) fieldName: \'json_name\'; fieldNumber: 10; beOptional; jsonFieldName: \'jsonName\')',
-		'#options => ((PBPropertySlot with: #GPBFieldOptions) fieldName: \'options\'; fieldNumber: 8; beOptional; jsonFieldName: \'options\')'
+		'#json_name => ((PBPropertySlot with: #PBTypeString) fieldName: \'json_name\'; fieldNumber: 10; beOptional; jsonFieldName: \'jsonName\')'
 	],
 	#category : #'Protobuf-Definitions'
 }

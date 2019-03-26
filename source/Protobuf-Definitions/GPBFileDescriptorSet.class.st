@@ -2,7 +2,7 @@ Class {
 	#name : #GPBFileDescriptorSet,
 	#superclass : #PBTypeMessage,
 	#instVars : [
-		'#file => ((PBPropertySlot with: #GPBFileDescriptorProto) fieldName: \'file\'; fieldNumber: 1; beRepeated)'
+		'#file => ((PBPropertySlot with: #GPBFileDescriptorProto) fieldName: \'file\'; fieldNumber: 1; beRepeated; jsonFieldName: \'file\')'
 	],
 	#category : #'Protobuf-Definitions'
 }

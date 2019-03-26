@@ -35,6 +35,6 @@ GPBCurrentDescriptor >> name [
 ]
 
 { #category : #'as yet unclassified' }
-GPBCurrentDescriptor >> slots [
-	^ slots
+GPBCurrentDescriptor >> sortedSlots [
+	^ slots sort: [:a :b | a fieldNumber <= b fieldNumber ]
 ]

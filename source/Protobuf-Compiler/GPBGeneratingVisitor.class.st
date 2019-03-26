@@ -57,7 +57,7 @@ GPBGeneratingVisitor >> pushDescriptor: aGPBDescriptorProto during: aBlockClosur
 		classBuilder
 			superclass: PBTypeMessage;
 			name: className;
-			slots: descriptorStack top slots;
+			slots: descriptorStack top sortedSlots;
 			category: targetPackage].
 	protoClass resolveEncodingType.
 	descriptorStack pop.
