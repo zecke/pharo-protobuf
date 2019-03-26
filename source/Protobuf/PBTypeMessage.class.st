@@ -1,16 +1,23 @@
 Class {
 	#name : #PBTypeMessage,
 	#superclass : #PBTypeName,
+	#classInstVars : [
+		'fieldNumberToSlotMap'
+	],
 	#category : #'Protobuf-Slots'
 }
 
 { #category : #'as yet unclassified' }
-PBTypeMessage class >> fieldNumberToSlotMap [
-	self flag: #todo. "Memoize this somehow in the class?"
+PBTypeMessage class >> buildFieldNumberToSlotMap [
 	^ self slots inject: Dictionary new into: [:dict :slot |
 		dict at: slot fieldNumber put: slot.
 		dict.
 	]
+]
+
+{ #category : #'as yet unclassified' }
+PBTypeMessage class >> fieldNumberToSlotMap [
+	^fieldNumberToSlotMap
 ]
 
 { #category : #'as yet unclassified' }
@@ -29,7 +36,8 @@ PBTypeMessage class >> materializeFrom: aReadStream [
 
 { #category : #'as yet unclassified' }
 PBTypeMessage class >> resolveEncodingType [
-	self slots do: #resolveEncodingType
+	self slots do: #resolveEncodingType.
+	fieldNumberToSlotMap := self buildFieldNumberToSlotMap.
 ]
 
 { #category : #'as yet unclassified' }
