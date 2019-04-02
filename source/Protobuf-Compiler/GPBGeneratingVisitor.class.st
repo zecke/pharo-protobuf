@@ -75,7 +75,6 @@ GPBGeneratingVisitor >> pushDescriptor: aGPBDescriptorProto during: aBlockClosur
 			name: className;
 			slots: slots;
 			category: targetPackage].
-	protoClass resolveEncodingType.
 	(slots anySatisfy: #hasDefaultValue) ifTrue: [
 		self class generateInitializerFor: protoClass].
 	generatedClasses add: protoClass.

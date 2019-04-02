@@ -8,7 +8,8 @@ Class {
 		'typeNames',
 		'protoPackageName',
 		'protoClassPrefix',
-		'protoTypeNames'
+		'protoTypeNames',
+		'customPrefix'
 	],
 	#category : #'Protobuf-Compiler'
 }
@@ -21,11 +22,17 @@ GPBTypeNamesVisitor >> currentBaseName [
 		ifNotEmpty: [ protoPackageName, '.', (protoTypeNames reversed joinUsing: '.') ].
 ]
 
+{ #category : #'as yet unclassified' }
+GPBTypeNamesVisitor >> customPrefix: aPrefixName [
+	customPrefix := aPrefixName
+]
+
 { #category : #initialization }
 GPBTypeNamesVisitor >> initialize [
 	super initialize.
 	typeNames := Dictionary new.
 	protoTypeNames := Stack new.
+	customPrefix := ''.
 ]
 
 { #category : #'as yet unclassified' }
@@ -72,6 +79,6 @@ GPBTypeNamesVisitor >> visitEnumDescriptorProto: aGPBEnumDescriptorProto [
 { #category : #'as yet unclassified' }
 GPBTypeNamesVisitor >> visitFileDescriptorProto: aGPBFileDescriptorProto [
 	protoPackageName := aGPBFileDescriptorProto package.
-	protoClassPrefix := aGPBFileDescriptorProto options objc_class_prefix.
+	protoClassPrefix := customPrefix, (aGPBFileDescriptorProto options objc_class_prefix ifNil: [ '' ]).
 	super visitFileDescriptorProto: aGPBFileDescriptorProto
 ]

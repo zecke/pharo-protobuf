@@ -33,7 +33,8 @@ GPBVisitorBase >> visitFieldDescriptorProto: aGPBFieldDescriptorProto [
 ]
 
 { #category : #'as yet unclassified' }
-GPBVisitorBase >> visitFileDescriptorProto: aGPBFileDescriptorProto [ 
+GPBVisitorBase >> visitFileDescriptorProto: aGPBFileDescriptorProto [
+	aGPBFileDescriptorProto enum_types do: [:each | each visit: self ].
 	aGPBFileDescriptorProto message_types do: [:each | each visit: self ].
 ]
 
