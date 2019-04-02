@@ -23,6 +23,17 @@ GPBFieldOptions >> deprecated: anObject [
 	deprecated:= anObject.
 ]
 
+{ #category : #'as yet unclassified' }
+GPBFieldOptions >> initialize [
+	super initialize.
+	ctype := 0" STRING ".
+	deprecated := false.
+	lazy := false.
+	jstype := 0" JS_NORMAL ".
+	weak := false.
+
+]
+
 { #category : #accessing }
 GPBFieldOptions >> packed [
 	 ^packed

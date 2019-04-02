@@ -10,3 +10,12 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #'as yet unclassified' }
+GPBMessageOptions >> initialize [
+	super initialize.
+	message_set_wire_format := false.
+	no_standard_descriptor_accessor := false.
+	deprecated := false.
+
+]

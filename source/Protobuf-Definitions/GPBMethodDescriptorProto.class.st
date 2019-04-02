@@ -11,3 +11,11 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #'as yet unclassified' }
+GPBMethodDescriptorProto >> initialize [
+	super initialize.
+	client_streaming := false.
+	server_streaming := false.
+
+]

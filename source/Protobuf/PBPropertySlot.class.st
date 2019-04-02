@@ -20,6 +20,11 @@ PBPropertySlot class >> with: aType [
 	^self new encodingTypeName: aType
 ]
 
+{ #category : #'as yet unclassified' }
+PBPropertySlot >> baseType [
+	^resolvedEncodingType ifNil: [ self error: 'Not resolved yet' ]
+]
+
 { #category : #accessing }
 PBPropertySlot >> beOptional [
 	optional := true
@@ -34,6 +39,11 @@ PBPropertySlot >> beRepeated [
 { #category : #'as yet unclassified' }
 PBPropertySlot >> decodeFrom: aValue to: anInstance [
 	resolvedEncodingType decodeFrom: aValue instVarIndex: index to: anInstance.
+]
+
+{ #category : #'as yet unclassified' }
+PBPropertySlot >> defaultValue [
+	^ defaultValue
 ]
 
 { #category : #accessing }
@@ -71,6 +81,11 @@ PBPropertySlot >> fieldNumber [
 { #category : #'as yet unclassified' }
 PBPropertySlot >> fieldNumber: anInteger [ 
 	fieldNumber := anInteger
+]
+
+{ #category : #'as yet unclassified' }
+PBPropertySlot >> hasDefaultValue [
+	^defaultValue isNotNil
 ]
 
 { #category : #comparing }

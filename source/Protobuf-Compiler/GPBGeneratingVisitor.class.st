@@ -13,6 +13,26 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+GPBGeneratingVisitor class >> generateInitializerFor: aProtoClass [ 
+	| methodCode |
+	methodCode := String streamContents: [:stream |
+		stream
+			nextPutAll: 'initialize'; cr;
+			nextPutAll: '	super initialize.'; cr.
+		aProtoClass slots do: [:slot |
+			slot hasDefaultValue ifTrue: [
+				stream
+					tab;
+					nextPutAll: slot fieldName;
+					nextPutAll: ' := ';
+					nextPutAll: (slot baseType defaultValueForInitializeCode: slot);
+					nextPutAll: '.';
+					cr.
+			]]].
+	aProtoClass compile: methodCode.
+]
+
+{ #category : #'as yet unclassified' }
 GPBGeneratingVisitor >> buildName: aString [
 	^descriptorStack
 						ifEmpty: [ '.', self currentFile package, '.', aString ]
@@ -44,7 +64,7 @@ GPBGeneratingVisitor >> initialize [
 
 { #category : #'as yet unclassified' }
 GPBGeneratingVisitor >> pushDescriptor: aGPBDescriptorProto during: aBlockClosure [
-	| className protoName protoClass |
+	| className protoName protoClass slots |
 	protoName := self buildName: aGPBDescriptorProto name.
 	className := self typeForName: protoName.
 
@@ -52,14 +72,16 @@ GPBGeneratingVisitor >> pushDescriptor: aGPBDescriptorProto during: aBlockClosur
 	aBlockClosure value.
 
 	"Build the class"
-	self flag: #TODO. "Pick different base class if there is a 'default' value or not."
+	slots := descriptorStack top sortedSlots.
 	protoClass := Smalltalk classInstaller make: [:classBuilder |
 		classBuilder
 			superclass: PBTypeMessage;
 			name: className;
-			slots: descriptorStack top sortedSlots;
+			slots: slots;
 			category: targetPackage].
 	protoClass resolveEncodingType.
+	(slots anySatisfy: #hasDefaultValue) ifTrue: [
+		self class generateInitializerFor: protoClass].
 	descriptorStack pop.
 ]
 

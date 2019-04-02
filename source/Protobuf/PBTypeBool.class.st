@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+PBTypeBool class >> defaultValueForInitializeCode: aSlot [ 
+	^aSlot defaultValue
+]
+
+{ #category : #'as yet unclassified' }
 PBTypeBool class >> doValidate: anInstance [
 	^anInstance | anInstance not
 ]

@@ -8,3 +8,11 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #'as yet unclassified' }
+GPBMethodOptions >> initialize [
+	super initialize.
+	deprecated := false.
+	idempotency_level := 0" IDEMPOTENCY_UNKNOWN ".
+
+]

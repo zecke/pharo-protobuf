@@ -7,3 +7,10 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #'as yet unclassified' }
+GPBEnumValueOptions >> initialize [
+	super initialize.
+	deprecated := false.
+
+]

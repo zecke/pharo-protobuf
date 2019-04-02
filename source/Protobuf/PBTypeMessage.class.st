@@ -30,7 +30,6 @@ PBTypeMessage class >> marshal: aMessage to: anEncoder with: aSlot [
 { #category : #materializing }
 PBTypeMessage class >> materializeFrom: aReadStream [
 	^self basicNew
-		initializeDefaults;
 		readFrom: aReadStream.
 ]
 
@@ -43,11 +42,6 @@ PBTypeMessage class >> resolveEncodingType [
 { #category : #'as yet unclassified' }
 PBTypeMessage class >> unmarshalFrom: aByteArray [ 
 	^self materializeFrom: aByteArray readStream
-]
-
-{ #category : #'as yet unclassified' }
-PBTypeMessage >> initializeDefaults [
-	self flag: #todo. "TODO(zecke): Initialize these based on the slots."
 ]
 
 { #category : #'as yet unclassified' }

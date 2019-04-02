@@ -57,6 +57,21 @@ GPBFileOptions >> go_package: anObject [
 	go_package:= anObject.
 ]
 
+{ #category : #'as yet unclassified' }
+GPBFileOptions >> initialize [
+	super initialize.
+	optimize_for := 1" SPEED ".
+	java_multiple_files := false.
+	cc_generic_services := false.
+	java_generic_services := false.
+	py_generic_services := false.
+	deprecated := false.
+	java_string_check_utf8 := false.
+	cc_enable_arenas := false.
+	php_generic_services := false.
+
+]
+
 { #category : #accessing }
 GPBFileOptions >> java_outer_classname [
 	 ^java_outer_classname

@@ -7,3 +7,10 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #'as yet unclassified' }
+GPBServiceOptions >> initialize [
+	super initialize.
+	deprecated := false.
+
+]

@@ -5,6 +5,14 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+PBTypeEnum class >> defaultValueForInitializeCode: aSlot [
+	^String streamContents: [:stream |
+		stream
+			nextPutAll: (classPool at: aSlot defaultValue) printString;
+			nextPutAll: '" '; nextPutAll: aSlot defaultValue; nextPutAll: ' "' ].
+]
+
+{ #category : #'as yet unclassified' }
 PBTypeEnum class >> marshal: aValue to: anEncoder with: aSlot [
 	anEncoder nextPutVarInt: aValue field: aSlot fieldNumber.
 ]
