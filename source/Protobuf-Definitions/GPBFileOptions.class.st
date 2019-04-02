@@ -28,13 +28,28 @@ Class {
 }
 
 { #category : #accessing }
+GPBFileOptions >> add_uninterpreted_option: anObject [
+	self uninterpreted_options add: anObject.
+]
+
+{ #category : #accessing }
 GPBFileOptions >> cc_enable_arenas [
-	 ^cc_enable_arenas
+	 ^cc_enable_arenas ifNil: [false]
 ]
 
 { #category : #accessing }
 GPBFileOptions >> cc_enable_arenas: anObject [
 	cc_enable_arenas:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileOptions >> cc_generic_services [
+	 ^cc_generic_services ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBFileOptions >> cc_generic_services: anObject [
+	cc_generic_services:= anObject.
 ]
 
 { #category : #accessing }
@@ -45,6 +60,16 @@ GPBFileOptions >> csharp_namespace [
 { #category : #accessing }
 GPBFileOptions >> csharp_namespace: anObject [
 	csharp_namespace:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileOptions >> deprecated [
+	 ^deprecated ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBFileOptions >> deprecated: anObject [
+	deprecated:= anObject.
 ]
 
 { #category : #accessing }
@@ -73,6 +98,36 @@ GPBFileOptions >> initialize [
 ]
 
 { #category : #accessing }
+GPBFileOptions >> java_generate_equals_and_hash [
+	 ^java_generate_equals_and_hash
+]
+
+{ #category : #accessing }
+GPBFileOptions >> java_generate_equals_and_hash: anObject [
+	java_generate_equals_and_hash:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileOptions >> java_generic_services [
+	 ^java_generic_services ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBFileOptions >> java_generic_services: anObject [
+	java_generic_services:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileOptions >> java_multiple_files [
+	 ^java_multiple_files ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBFileOptions >> java_multiple_files: anObject [
+	java_multiple_files:= anObject.
+]
+
+{ #category : #accessing }
 GPBFileOptions >> java_outer_classname [
 	 ^java_outer_classname
 ]
@@ -93,6 +148,16 @@ GPBFileOptions >> java_package: anObject [
 ]
 
 { #category : #accessing }
+GPBFileOptions >> java_string_check_utf8 [
+	 ^java_string_check_utf8 ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBFileOptions >> java_string_check_utf8: anObject [
+	java_string_check_utf8:= anObject.
+]
+
+{ #category : #accessing }
 GPBFileOptions >> objc_class_prefix [
 	 ^objc_class_prefix
 ]
@@ -104,10 +169,85 @@ GPBFileOptions >> objc_class_prefix: anObject [
 
 { #category : #accessing }
 GPBFileOptions >> optimize_for [
-	 ^optimize_for
+	 ^optimize_for ifNil: [1" SPEED "]
 ]
 
 { #category : #accessing }
 GPBFileOptions >> optimize_for: anObject [
 	optimize_for:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileOptions >> php_class_prefix [
+	 ^php_class_prefix
+]
+
+{ #category : #accessing }
+GPBFileOptions >> php_class_prefix: anObject [
+	php_class_prefix:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileOptions >> php_generic_services [
+	 ^php_generic_services ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBFileOptions >> php_generic_services: anObject [
+	php_generic_services:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileOptions >> php_metadata_namespace [
+	 ^php_metadata_namespace
+]
+
+{ #category : #accessing }
+GPBFileOptions >> php_metadata_namespace: anObject [
+	php_metadata_namespace:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileOptions >> php_namespace [
+	 ^php_namespace
+]
+
+{ #category : #accessing }
+GPBFileOptions >> php_namespace: anObject [
+	php_namespace:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileOptions >> py_generic_services [
+	 ^py_generic_services ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBFileOptions >> py_generic_services: anObject [
+	py_generic_services:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileOptions >> ruby_package [
+	 ^ruby_package
+]
+
+{ #category : #accessing }
+GPBFileOptions >> ruby_package: anObject [
+	ruby_package:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileOptions >> swift_prefix [
+	 ^swift_prefix
+]
+
+{ #category : #accessing }
+GPBFileOptions >> swift_prefix: anObject [
+	swift_prefix:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileOptions >> uninterpreted_options [
+	 ^uninterpreted_option ifNil: [ uninterpreted_option := OrderedCollection new ]
 ]

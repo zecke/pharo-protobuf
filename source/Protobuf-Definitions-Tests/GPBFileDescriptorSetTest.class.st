@@ -20,7 +20,8 @@ GPBFileDescriptorSetTest class >> regenerateDefinitions [
 	nameTable := GPBTypeNamesVisitor new.
 	generator := GPBGeneratingVisitor new typeNames: nameTable; targetPackage: 'Protobuf-Definitions'.
 	descriptor visit: nameTable.
-	descriptor visit: generator.
+	generator visit: descriptor.
+	
 ]
 
 { #category : #tests }

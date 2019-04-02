@@ -12,6 +12,16 @@ Class {
 }
 
 { #category : #accessing }
+GPBEnumDescriptorProto >> add_reserved_name: anObject [
+	self reserved_names add: anObject.
+]
+
+{ #category : #accessing }
+GPBEnumDescriptorProto >> add_reserved_range: anObject [
+	self reserved_ranges add: anObject.
+]
+
+{ #category : #accessing }
 GPBEnumDescriptorProto >> add_value: anObject [
 	self values add: anObject.
 ]
@@ -24,6 +34,26 @@ GPBEnumDescriptorProto >> name [
 { #category : #accessing }
 GPBEnumDescriptorProto >> name: anObject [
 	name:= anObject.
+]
+
+{ #category : #accessing }
+GPBEnumDescriptorProto >> options [
+	 ^options
+]
+
+{ #category : #accessing }
+GPBEnumDescriptorProto >> options: anObject [
+	options:= anObject.
+]
+
+{ #category : #accessing }
+GPBEnumDescriptorProto >> reserved_names [
+	 ^reserved_name ifNil: [ reserved_name := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBEnumDescriptorProto >> reserved_ranges [
+	 ^reserved_range ifNil: [ reserved_range := OrderedCollection new ]
 ]
 
 { #category : #accessing }

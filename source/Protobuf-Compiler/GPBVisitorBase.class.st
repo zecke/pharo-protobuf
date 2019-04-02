@@ -5,6 +5,11 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
+GPBVisitorBase >> visit: aGPBFileDescriptorSet [ 
+	aGPBFileDescriptorSet visit: self
+]
+
+{ #category : #'as yet unclassified' }
 GPBVisitorBase >> visitDescriptorProto: aGPBDescriptorProto [
 	aGPBDescriptorProto enum_types do: [:each | each visit: self ].
 	aGPBDescriptorProto nested_types do: [:each | each visit: self ].

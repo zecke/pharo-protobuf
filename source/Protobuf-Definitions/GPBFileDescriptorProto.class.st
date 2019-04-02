@@ -19,8 +19,53 @@ Class {
 }
 
 { #category : #accessing }
+GPBFileDescriptorProto >> add_dependency: anObject [
+	self dependencys add: anObject.
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> add_enum_type: anObject [
+	self enum_types add: anObject.
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> add_extension: anObject [
+	self extensions add: anObject.
+]
+
+{ #category : #accessing }
 GPBFileDescriptorProto >> add_message_type: anObject [
 	self message_types add: anObject.
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> add_public_dependency: anObject [
+	self public_dependencys add: anObject.
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> add_service: anObject [
+	self services add: anObject.
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> add_weak_dependency: anObject [
+	self weak_dependencys add: anObject.
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> dependencys [
+	 ^dependency ifNil: [ dependency := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> enum_types [
+	 ^enum_type ifNil: [ enum_type := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> extensions [
+	 ^extension ifNil: [ extension := OrderedCollection new ]
 ]
 
 { #category : #accessing }
@@ -56,4 +101,39 @@ GPBFileDescriptorProto >> package [
 { #category : #accessing }
 GPBFileDescriptorProto >> package: anObject [
 	package:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> public_dependencys [
+	 ^public_dependency ifNil: [ public_dependency := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> services [
+	 ^service ifNil: [ service := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> source_code_info [
+	 ^source_code_info
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> source_code_info: anObject [
+	source_code_info:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> syntax [
+	 ^syntax
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> syntax: anObject [
+	syntax:= anObject.
+]
+
+{ #category : #accessing }
+GPBFileDescriptorProto >> weak_dependencys [
+	 ^weak_dependency ifNil: [ weak_dependency := OrderedCollection new ]
 ]

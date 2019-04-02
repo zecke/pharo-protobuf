@@ -7,7 +7,8 @@ Class {
 		'classPrefix',
 		'targetPackage',
 		'customPrefix',
-		'typeNames'
+		'typeNames',
+		'generatedClasses'
 	],
 	#category : #'Protobuf-Compiler'
 }
@@ -49,17 +50,12 @@ GPBGeneratingVisitor >> currentFile [
 	^fileStack top.
 ]
 
-{ #category : #'as yet unclassified' }
-GPBGeneratingVisitor >> customPrefix: aPrefix [
-	customPrefix := aPrefix
-]
-
 { #category : #initialization }
 GPBGeneratingVisitor >> initialize [
 	super initialize.
 	descriptorStack := Stack new.
 	fileStack := Stack new.
-	customPrefix := ''.
+	generatedClasses := OrderedCollection new.
 ]
 
 { #category : #'as yet unclassified' }
@@ -82,6 +78,7 @@ GPBGeneratingVisitor >> pushDescriptor: aGPBDescriptorProto during: aBlockClosur
 	protoClass resolveEncodingType.
 	(slots anySatisfy: #hasDefaultValue) ifTrue: [
 		self class generateInitializerFor: protoClass].
+	generatedClasses add: protoClass.
 	descriptorStack pop.
 ]
 
@@ -113,6 +110,12 @@ GPBGeneratingVisitor >> updateClassPrefix [
 	classPrefix := fileStack
 		ifEmpty: [ nil ]
 		ifNotEmpty: [ fileStack top options objc_class_prefix ].
+]
+
+{ #category : #'as yet unclassified' }
+GPBGeneratingVisitor >> visit: aSet [
+	super visit: aSet.
+	generatedClasses do: #resolveEncodingType.
 ]
 
 { #category : #'as yet unclassified' }

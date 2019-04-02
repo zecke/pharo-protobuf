@@ -6,3 +6,13 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #accessing }
+GPBSourceCodeInfo >> add_location: anObject [
+	self locations add: anObject.
+]
+
+{ #category : #accessing }
+GPBSourceCodeInfo >> locations [
+	 ^location ifNil: [ location := OrderedCollection new ]
+]

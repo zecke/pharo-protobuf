@@ -10,3 +10,53 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #accessing }
+GPBSourceCodeInfo_Location >> add_leading_detached_comments: anObject [
+	self leading_detached_commentss add: anObject.
+]
+
+{ #category : #accessing }
+GPBSourceCodeInfo_Location >> add_path: anObject [
+	self paths add: anObject.
+]
+
+{ #category : #accessing }
+GPBSourceCodeInfo_Location >> add_span: anObject [
+	self spans add: anObject.
+]
+
+{ #category : #accessing }
+GPBSourceCodeInfo_Location >> leading_comments [
+	 ^leading_comments
+]
+
+{ #category : #accessing }
+GPBSourceCodeInfo_Location >> leading_comments: anObject [
+	leading_comments:= anObject.
+]
+
+{ #category : #accessing }
+GPBSourceCodeInfo_Location >> leading_detached_commentss [
+	 ^leading_detached_comments ifNil: [ leading_detached_comments := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBSourceCodeInfo_Location >> paths [
+	 ^path ifNil: [ path := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBSourceCodeInfo_Location >> spans [
+	 ^span ifNil: [ span := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBSourceCodeInfo_Location >> trailing_comments [
+	 ^trailing_comments
+]
+
+{ #category : #accessing }
+GPBSourceCodeInfo_Location >> trailing_comments: anObject [
+	trailing_comments:= anObject.
+]

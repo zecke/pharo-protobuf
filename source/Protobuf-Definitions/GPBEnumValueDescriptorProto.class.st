@@ -28,3 +28,13 @@ GPBEnumValueDescriptorProto >> number [
 GPBEnumValueDescriptorProto >> number: anObject [
 	number:= anObject.
 ]
+
+{ #category : #accessing }
+GPBEnumValueDescriptorProto >> options [
+	 ^options
+]
+
+{ #category : #accessing }
+GPBEnumValueDescriptorProto >> options: anObject [
+	options:= anObject.
+]

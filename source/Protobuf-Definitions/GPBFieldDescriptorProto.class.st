@@ -77,6 +77,16 @@ GPBFieldDescriptorProto >> number: anObject [
 ]
 
 { #category : #accessing }
+GPBFieldDescriptorProto >> oneof_index [
+	 ^oneof_index
+]
+
+{ #category : #accessing }
+GPBFieldDescriptorProto >> oneof_index: anObject [
+	oneof_index:= anObject.
+]
+
+{ #category : #accessing }
 GPBFieldDescriptorProto >> options [
 	 ^options
 ]

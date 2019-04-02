@@ -14,8 +14,23 @@ Class {
 }
 
 { #category : #accessing }
+GPBFieldOptions >> add_uninterpreted_option: anObject [
+	self uninterpreted_options add: anObject.
+]
+
+{ #category : #accessing }
+GPBFieldOptions >> ctype [
+	 ^ctype ifNil: [0" STRING "]
+]
+
+{ #category : #accessing }
+GPBFieldOptions >> ctype: anObject [
+	ctype:= anObject.
+]
+
+{ #category : #accessing }
 GPBFieldOptions >> deprecated [
-	 ^deprecated
+	 ^deprecated ifNil: [false]
 ]
 
 { #category : #accessing }
@@ -35,6 +50,26 @@ GPBFieldOptions >> initialize [
 ]
 
 { #category : #accessing }
+GPBFieldOptions >> jstype [
+	 ^jstype ifNil: [0" JS_NORMAL "]
+]
+
+{ #category : #accessing }
+GPBFieldOptions >> jstype: anObject [
+	jstype:= anObject.
+]
+
+{ #category : #accessing }
+GPBFieldOptions >> lazy [
+	 ^lazy ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBFieldOptions >> lazy: anObject [
+	lazy:= anObject.
+]
+
+{ #category : #accessing }
 GPBFieldOptions >> packed [
 	 ^packed
 ]
@@ -42,4 +77,19 @@ GPBFieldOptions >> packed [
 { #category : #accessing }
 GPBFieldOptions >> packed: anObject [
 	packed:= anObject.
+]
+
+{ #category : #accessing }
+GPBFieldOptions >> uninterpreted_options [
+	 ^uninterpreted_option ifNil: [ uninterpreted_option := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBFieldOptions >> weak [
+	 ^weak ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBFieldOptions >> weak: anObject [
+	weak:= anObject.
 ]

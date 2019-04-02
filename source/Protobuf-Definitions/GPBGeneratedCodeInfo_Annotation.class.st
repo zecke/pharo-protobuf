@@ -9,3 +9,43 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #accessing }
+GPBGeneratedCodeInfo_Annotation >> add_path: anObject [
+	self paths add: anObject.
+]
+
+{ #category : #accessing }
+GPBGeneratedCodeInfo_Annotation >> begin [
+	 ^begin
+]
+
+{ #category : #accessing }
+GPBGeneratedCodeInfo_Annotation >> begin: anObject [
+	begin:= anObject.
+]
+
+{ #category : #accessing }
+GPBGeneratedCodeInfo_Annotation >> end [
+	 ^end
+]
+
+{ #category : #accessing }
+GPBGeneratedCodeInfo_Annotation >> end: anObject [
+	end:= anObject.
+]
+
+{ #category : #accessing }
+GPBGeneratedCodeInfo_Annotation >> paths [
+	 ^path ifNil: [ path := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBGeneratedCodeInfo_Annotation >> source_file [
+	 ^source_file
+]
+
+{ #category : #accessing }
+GPBGeneratedCodeInfo_Annotation >> source_file: anObject [
+	source_file:= anObject.
+]

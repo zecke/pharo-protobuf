@@ -8,9 +8,29 @@ Class {
 	#category : #'Protobuf-Definitions'
 }
 
+{ #category : #accessing }
+GPBServiceOptions >> add_uninterpreted_option: anObject [
+	self uninterpreted_options add: anObject.
+]
+
+{ #category : #accessing }
+GPBServiceOptions >> deprecated [
+	 ^deprecated ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBServiceOptions >> deprecated: anObject [
+	deprecated:= anObject.
+]
+
 { #category : #'as yet unclassified' }
 GPBServiceOptions >> initialize [
 	super initialize.
 	deprecated := false.
 
+]
+
+{ #category : #accessing }
+GPBServiceOptions >> uninterpreted_options [
+	 ^uninterpreted_option ifNil: [ uninterpreted_option := OrderedCollection new ]
 ]

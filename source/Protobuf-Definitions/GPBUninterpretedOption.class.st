@@ -12,3 +12,73 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #accessing }
+GPBUninterpretedOption >> add_name: anObject [
+	self names add: anObject.
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> aggregate_value [
+	 ^aggregate_value
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> aggregate_value: anObject [
+	aggregate_value:= anObject.
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> double_value [
+	 ^double_value
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> double_value: anObject [
+	double_value:= anObject.
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> identifier_value [
+	 ^identifier_value
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> identifier_value: anObject [
+	identifier_value:= anObject.
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> names [
+	 ^name ifNil: [ name := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> negative_int_value [
+	 ^negative_int_value
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> negative_int_value: anObject [
+	negative_int_value:= anObject.
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> positive_int_value [
+	 ^positive_int_value
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> positive_int_value: anObject [
+	positive_int_value:= anObject.
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> string_value [
+	 ^string_value
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption >> string_value: anObject [
+	string_value:= anObject.
+]

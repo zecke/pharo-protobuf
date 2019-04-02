@@ -7,3 +7,23 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #accessing }
+GPBUninterpretedOption_NamePart >> is_extension [
+	 ^is_extension
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption_NamePart >> is_extension: anObject [
+	is_extension:= anObject.
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption_NamePart >> name_part [
+	 ^name_part
+]
+
+{ #category : #accessing }
+GPBUninterpretedOption_NamePart >> name_part: anObject [
+	name_part:= anObject.
+]

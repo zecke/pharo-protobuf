@@ -7,3 +7,23 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #accessing }
+GPBEnumDescriptorProto_EnumReservedRange >> end [
+	 ^end
+]
+
+{ #category : #accessing }
+GPBEnumDescriptorProto_EnumReservedRange >> end: anObject [
+	end:= anObject.
+]
+
+{ #category : #accessing }
+GPBEnumDescriptorProto_EnumReservedRange >> start [
+	 ^start
+]
+
+{ #category : #accessing }
+GPBEnumDescriptorProto_EnumReservedRange >> start: anObject [
+	start:= anObject.
+]

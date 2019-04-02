@@ -35,7 +35,9 @@ PBTypeMessage class >> materializeFrom: aReadStream [
 
 { #category : #'as yet unclassified' }
 PBTypeMessage class >> resolveEncodingType [
-	self slots do: #resolveEncodingType.
+	self slots do: [:slot |
+		slot resolveEncodingType.
+		slot baseType installingIn: self for: slot].
 	fieldNumberToSlotMap := self buildFieldNumberToSlotMap.
 ]
 

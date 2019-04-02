@@ -20,6 +20,16 @@ GPBDescriptorProto_ExtensionRange >> end: anObject [
 ]
 
 { #category : #accessing }
+GPBDescriptorProto_ExtensionRange >> options [
+	 ^options
+]
+
+{ #category : #accessing }
+GPBDescriptorProto_ExtensionRange >> options: anObject [
+	options:= anObject.
+]
+
+{ #category : #accessing }
 GPBDescriptorProto_ExtensionRange >> start [
 	 ^start
 ]

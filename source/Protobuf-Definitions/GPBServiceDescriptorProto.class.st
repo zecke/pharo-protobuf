@@ -8,3 +8,33 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #accessing }
+GPBServiceDescriptorProto >> add_method: anObject [
+	self methods add: anObject.
+]
+
+{ #category : #accessing }
+GPBServiceDescriptorProto >> methods [
+	 ^method ifNil: [ method := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBServiceDescriptorProto >> name [
+	 ^name
+]
+
+{ #category : #accessing }
+GPBServiceDescriptorProto >> name: anObject [
+	name:= anObject.
+]
+
+{ #category : #accessing }
+GPBServiceDescriptorProto >> options [
+	 ^options
+]
+
+{ #category : #accessing }
+GPBServiceDescriptorProto >> options: anObject [
+	options:= anObject.
+]

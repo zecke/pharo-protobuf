@@ -42,6 +42,16 @@ GPBDescriptorProto >> add_nested_type: anObject [
 ]
 
 { #category : #accessing }
+GPBDescriptorProto >> add_oneof_decl: anObject [
+	self oneof_decls add: anObject.
+]
+
+{ #category : #accessing }
+GPBDescriptorProto >> add_reserved_name: anObject [
+	self reserved_names add: anObject.
+]
+
+{ #category : #accessing }
 GPBDescriptorProto >> add_reserved_range: anObject [
 	self reserved_ranges add: anObject.
 ]
@@ -79,6 +89,26 @@ GPBDescriptorProto >> name: anObject [
 { #category : #accessing }
 GPBDescriptorProto >> nested_types [
 	 ^nested_type ifNil: [ nested_type := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBDescriptorProto >> oneof_decls [
+	 ^oneof_decl ifNil: [ oneof_decl := OrderedCollection new ]
+]
+
+{ #category : #accessing }
+GPBDescriptorProto >> options [
+	 ^options
+]
+
+{ #category : #accessing }
+GPBDescriptorProto >> options: anObject [
+	options:= anObject.
+]
+
+{ #category : #accessing }
+GPBDescriptorProto >> reserved_names [
+	 ^reserved_name ifNil: [ reserved_name := OrderedCollection new ]
 ]
 
 { #category : #accessing }

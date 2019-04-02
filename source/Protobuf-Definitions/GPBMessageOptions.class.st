@@ -11,6 +11,21 @@ Class {
 	#category : #'Protobuf-Definitions'
 }
 
+{ #category : #accessing }
+GPBMessageOptions >> add_uninterpreted_option: anObject [
+	self uninterpreted_options add: anObject.
+]
+
+{ #category : #accessing }
+GPBMessageOptions >> deprecated [
+	 ^deprecated ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBMessageOptions >> deprecated: anObject [
+	deprecated:= anObject.
+]
+
 { #category : #'as yet unclassified' }
 GPBMessageOptions >> initialize [
 	super initialize.
@@ -18,4 +33,39 @@ GPBMessageOptions >> initialize [
 	no_standard_descriptor_accessor := false.
 	deprecated := false.
 
+]
+
+{ #category : #accessing }
+GPBMessageOptions >> map_entry [
+	 ^map_entry
+]
+
+{ #category : #accessing }
+GPBMessageOptions >> map_entry: anObject [
+	map_entry:= anObject.
+]
+
+{ #category : #accessing }
+GPBMessageOptions >> message_set_wire_format [
+	 ^message_set_wire_format ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBMessageOptions >> message_set_wire_format: anObject [
+	message_set_wire_format:= anObject.
+]
+
+{ #category : #accessing }
+GPBMessageOptions >> no_standard_descriptor_accessor [
+	 ^no_standard_descriptor_accessor ifNil: [false]
+]
+
+{ #category : #accessing }
+GPBMessageOptions >> no_standard_descriptor_accessor: anObject [
+	no_standard_descriptor_accessor:= anObject.
+]
+
+{ #category : #accessing }
+GPBMessageOptions >> uninterpreted_options [
+	 ^uninterpreted_option ifNil: [ uninterpreted_option := OrderedCollection new ]
 ]

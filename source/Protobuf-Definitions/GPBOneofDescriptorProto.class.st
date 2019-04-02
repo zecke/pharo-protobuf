@@ -7,3 +7,23 @@ Class {
 	],
 	#category : #'Protobuf-Definitions'
 }
+
+{ #category : #accessing }
+GPBOneofDescriptorProto >> name [
+	 ^name
+]
+
+{ #category : #accessing }
+GPBOneofDescriptorProto >> name: anObject [
+	name:= anObject.
+]
+
+{ #category : #accessing }
+GPBOneofDescriptorProto >> options [
+	 ^options
+]
+
+{ #category : #accessing }
+GPBOneofDescriptorProto >> options: anObject [
+	options:= anObject.
+]

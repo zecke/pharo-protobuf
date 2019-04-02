@@ -24,7 +24,11 @@ PBTypeName class >> installingIn: aClass for: aSlot [
 			cr;tab;
 			nextPutAll: ' ^';
 			nextPutAll: aSlot pharoFieldName.
-		 ].
+		aSlot hasDefaultValue ifTrue: [
+			str
+				nextPutAll: ' ifNil: [';
+				nextPutAll: (aSlot baseType defaultValueForInitializeCode: aSlot);
+				nextPutAll: ']']].
 	writer := String streamContents: [ :str |
 		str 
 			nextPutAll: aSlot pharoFieldName;
