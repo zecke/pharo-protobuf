@@ -5,17 +5,14 @@ ffiLibraryName
 Class {
 	#name : #GrpcSlice,
 	#superclass : #FFIExternalStructure,
+	#traits : 'TGrpcCalloutLibrary',
+	#classTraits : 'TGrpcCalloutLibrary classTrait',
 	#classVars : [
 		'OFFSET_DATA',
 		'OFFSET_REFCOUNT'
 	],
 	#category : #'GRPC-Bindings'
 }
-
-{ #category : #'library path' }
-GrpcSlice class >> ffiLibraryName [
-	^GrpcLibrary
-]
 
 { #category : #'field definition' }
 GrpcSlice class >> fieldsDesc [
@@ -72,11 +69,6 @@ GrpcSlice >> data [
 GrpcSlice >> data: anObject [
 	"This method was automatically generated"
 	handle structAt: OFFSET_DATA put: anObject getHandle length: GrpcSliceData byteSize
-]
-
-{ #category : #'as yet unclassified' }
-GrpcSlice >> ffiLibraryName [
-	^GrpcLibrary
 ]
 
 { #category : #'as yet unclassified' }

@@ -1,6 +1,8 @@
 Class {
 	#name : #GrpcByteBuffer,
 	#superclass : #FFIExternalObject,
+	#traits : 'TGrpcCalloutLibrary',
+	#classTraits : 'TGrpcCalloutLibrary classTrait',
 	#category : #'GRPC-Bindings'
 }
 
@@ -10,19 +12,9 @@ GrpcByteBuffer class >> createRaw: anArray size: aSize [
 		autoRelease
 ]
 
-{ #category : #'as yet unclassified' }
-GrpcByteBuffer class >> ffiLibraryName [
-	^GrpcLibrary
-]
-
 { #category : #deleting }
 GrpcByteBuffer >> destroy [
 	self ffiCall: 'void grpc_byte_buffer_destroy(self)'
-]
-
-{ #category : #'library path' }
-GrpcByteBuffer >> ffiLibraryName [
-	^GrpcLibrary
 ]
 
 { #category : #'initialize-release' }
@@ -36,6 +28,17 @@ GrpcByteBuffer >> free [
 { #category : #accessing }
 GrpcByteBuffer >> length [
 	^self ffiCall: 'size_t grpc_byte_buffer_length(self)'
+]
+
+{ #category : #'as yet unclassified' }
+GrpcByteBuffer >> readAll [
+	"Reads all from the ByteBuffer and returns it as uncompressed slice"
+	| reader |
+	reader := GrpcByteBufferReader externalNew.
+	^[
+		reader init: self.
+		reader readAll.
+	] ensure: [ reader release ]
 ]
 
 { #category : #'initialize-release' }
