@@ -28,17 +28,33 @@ GrpcSlice class >> fieldsDesc [
 
 { #category : #finalization }
 GrpcSlice class >> finalizeResourceData: aSlice [
-	self primSliceUnref: aSlice.
+	aSlice release.
 ]
 
 { #category : #finalization }
 GrpcSlice class >> primSliceCreate: aByteArray size: aSize [
-	^self ffiCall: #(GrpcSlice grpc_slice_from_copied_buffer(char *aByteArray, size_t aSize))
+	^(self ffiCall: #(GrpcSlice grpc_slice_from_copied_buffer(char *aByteArray, size_t aSize)))
+		autoRelease
+]
+
+{ #category : #finalization }
+GrpcSlice class >> primSliceRef: aSlice [
+	self ffiCall: #(GrpcSlice grpc_slice_ref(GrpcSlice aSlice))
 ]
 
 { #category : #finalization }
 GrpcSlice class >> primSliceUnref: aSlice [
 	self ffiCall: #(void grpc_slice_unref(GrpcSlice aSlice))
+]
+
+{ #category : #converting }
+GrpcSlice >> asGrpcByteArray [
+	| array |
+	array := FFIExternalArray externalNewType: GrpcSlice size: 1.
+	^[ 
+		array at: 1 put: self.
+		GrpcByteBuffer createRaw: array getHandle size: 1.
+	] ensure: [ array free ]
 ]
 
 { #category : #'as yet unclassified' }
@@ -64,9 +80,8 @@ GrpcSlice >> ffiLibraryName [
 ]
 
 { #category : #'as yet unclassified' }
-GrpcSlice >> initialize [
-	super initialize.
-	self autoRelease.
+GrpcSlice >> ref [
+	^self class primSliceRef: self
 ]
 
 { #category : #'accessing structure variables' }
@@ -81,15 +96,25 @@ GrpcSlice >> refcount: anObject [
 	handle pointerAt: OFFSET_REFCOUNT put: anObject getHandle.
 ]
 
+{ #category : #dependencies }
+GrpcSlice >> release [
+	self unref.
+	self free.
+]
+
 { #category : #'as yet unclassified' }
 GrpcSlice >> resourceData [
 	^self
 ]
 
 { #category : #'as yet unclassified' }
+GrpcSlice >> sliceCopy [
+	^self ref
+		autoRelease
+]
+
+{ #category : #'as yet unclassified' }
 GrpcSlice >> unref [
 	self class primSliceUnref: self.
-	"Safety feature and turn this into an inlined version"
-	self refcount: (ExternalData fromHandle: ExternalAddress new type: ExternalType void asPointerType).
-	self data inlined length: 0.
+	self refcount: (ExternalData fromHandle: ExternalAddress null type: 'void*')
 ]
