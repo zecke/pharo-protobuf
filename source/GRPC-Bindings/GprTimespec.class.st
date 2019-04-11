@@ -85,7 +85,6 @@ GprTimespec >> convertClockType: aTargetType [
 
 { #category : #arithmetic }
 GprTimespec >> time_add: aTimeSpec [
-	self halt.
 	^self ffiCall: 'GprTimespec gpr_time_add(GprTimespec self, GprTimespec aTimeSpec)'
 ]
 
