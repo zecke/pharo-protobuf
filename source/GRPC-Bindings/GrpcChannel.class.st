@@ -11,6 +11,12 @@ GrpcChannel class >> ffiLibraryName [
 	^self ffiLibrary
 ]
 
+{ #category : #'instance creation' }
+GrpcChannel class >> newInsecure: aTarget [
+	^(self ffiCall: 'GrpcChannel* grpc_insecure_channel_create(char* aTarget, nil, nil)')
+		autoRelease
+]
+
 { #category : #'as yet unclassified' }
 GrpcChannel >> createCall [
 	^(self ffiCall: 'GrpcCall* ')
