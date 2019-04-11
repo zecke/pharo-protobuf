@@ -18,6 +18,12 @@ GrpcLibrary class >> initialize [
 ]
 
 { #category : #'accessing platform' }
+GrpcLibrary class >> startUp: isImageStarting [
+
+	isImageStarting ifTrue: [ self uniqueInstance initializeGrpc ]
+]
+
+{ #category : #'accessing platform' }
 GrpcLibrary >> grpc_init [
 	self ffiCall: #(void grpc_init(void))
 ]
