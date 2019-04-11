@@ -9,6 +9,7 @@ Class {
 { #category : #dependencies }
 GrpcCall >> release [
 	handle ifNotNil: [self unref].
+	handle := nil.
 ]
 
 { #category : #'as yet unclassified' }
