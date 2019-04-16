@@ -19,7 +19,7 @@ GrpcChannel class >> newInsecure: aTarget [
 
 { #category : #'as yet unclassified' }
 GrpcChannel >> createCall: aQueue method: aMethodSlice deadline: aDeadline [
-	^(self ffiCall: 'GrpcCall* grpc_channel_create_call(self, nil, 0, GrpcCompletionQueue aQueue,
+	^(self ffiCall: 'GrpcCall* grpc_channel_create_call(self, nil, 0, GrpcCompletionQueue* aQueue,
 											GrpcSlice aMethodSlice, nil,
 	                               GprTimespec aDeadline, nil)')
 		autoRelease

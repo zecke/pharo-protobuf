@@ -6,6 +6,11 @@ Class {
 	#category : #'GRPC-Bindings'
 }
 
+{ #category : #'library path' }
+GrpcCall class >> ffiLibraryName [
+	^self ffiLibrary
+]
+
 { #category : #dependencies }
 GrpcCall >> release [
 	handle ifNotNil: [self unref].

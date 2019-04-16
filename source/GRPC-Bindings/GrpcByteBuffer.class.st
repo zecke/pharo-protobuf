@@ -8,7 +8,7 @@ Class {
 
 { #category : #'as yet unclassified' }
 GrpcByteBuffer class >> createRaw: anArray size: aSize [
-	^(self ffiCall: 'GrpcByteBuffer grpc_raw_byte_buffer_create(void* anArray, size_t aSize)')
+	^(self ffiCall: 'GrpcByteBuffer* grpc_raw_byte_buffer_create(void* anArray, size_t aSize)')
 		autoRelease
 ]
 
@@ -17,15 +17,9 @@ GrpcByteBuffer class >> ffiLibraryName [
 	^self ffiLibrary
 ]
 
-{ #category : #'instance creation' }
-GrpcByteBuffer class >> new [
-	self halt.
-	^super new 
-]
-
 { #category : #'as yet unclassified' }
 GrpcByteBuffer class >> primByteBufferDestroy: aGrpcByteBuffer [ 
-	self shouldBeImplemented.
+	self ffiCall: 'void grpc_slice_buffer_destroy(GrpcByteBuffer* aGrpcByteBuffer)'
 ]
 
 { #category : #'as yet unclassified' }
@@ -36,14 +30,6 @@ GrpcByteBuffer class >> primCreateRaw: slices size: aSize [
 { #category : #deleting }
 GrpcByteBuffer >> destroy [
 	self ffiCall: 'void grpc_byte_buffer_destroy(self)'
-]
-
-{ #category : #'initialize-release' }
-GrpcByteBuffer >> free [
-	"Free the handle pointed to by the receiver"
-	(handle ~~ nil and:[handle isExternalAddress]) ifTrue:[
-		self class primByteBufferDestroy: self].
-	handle := nil.
 ]
 
 { #category : #accessing }
@@ -65,5 +51,4 @@ GrpcByteBuffer >> readAll [
 { #category : #'initialize-release' }
 GrpcByteBuffer >> release [
 	self destroy.
-	self free.
 ]
