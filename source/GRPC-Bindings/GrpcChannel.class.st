@@ -38,6 +38,18 @@ GrpcChannel >> free [
 	handle := nil.
 ]
 
+{ #category : #'as yet unclassified' }
+GrpcChannel >> getTarget [
+	| target |
+	target := self prim_get_target.
+	^ [ target fromCString ] ensure: [Gpr free: target].
+]
+
+{ #category : #'as yet unclassified' }
+GrpcChannel >> prim_get_target [
+	^self ffiCall: 'void* grpc_channel_get_target(self)'
+]
+
 { #category : #dependencies }
 GrpcChannel >> release [
 	handle ifNotNil: [self destroy].

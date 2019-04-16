@@ -55,6 +55,19 @@ GrpcSlice class >> primSliceUnref: aSlice [
 ]
 
 { #category : #converting }
+GrpcSlice >> asByteArray [
+	^self refcount isNull
+		ifTrue: [
+			| inlined |
+			inlined := self data inlined.
+			inlined data getHandle copyFrom: 1 to: inlined length ]
+		ifFalse: [
+			| refcounted |
+			refcounted := self data refcounted.
+			refcounted bytes copyFrom: 1 to: refcounted length ].
+]
+
+{ #category : #converting }
 GrpcSlice >> asGrpcByteArray [
 	| array |
 	array := FFIExternalArray externalNewType: GrpcSlice size: 1.

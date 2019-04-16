@@ -90,7 +90,7 @@ GprTimespec >> time_add: aTimeSpec [
 
 { #category : #arithmetic }
 GprTimespec >> time_sub: aTimeSpec [
-	^self ffiCall: 'GprTimespec gpr_time_sub(GprTimsSpec self, GprTimsSpec aTimeSpec)'
+	^self ffiCall: 'GprTimespec gpr_time_sub(GprTimespec self, GprTimespec aTimeSpec)'
 ]
 
 { #category : #'accessing structure variables' }
