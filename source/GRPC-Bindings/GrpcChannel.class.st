@@ -1,6 +1,6 @@
 Class {
 	#name : #GrpcChannel,
-	#superclass : #FFIExternalObject,
+	#superclass : #FFIOpaqueObject,
 	#traits : 'TGrpcCalloutLibrary',
 	#classTraits : 'TGrpcCalloutLibrary classTrait',
 	#category : #'GRPC-Bindings'

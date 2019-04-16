@@ -1,6 +1,6 @@
 Class {
 	#name : #GrpcCompletionQueue,
-	#superclass : #FFIExternalObject,
+	#superclass : #FFIOpaqueObject,
 	#traits : 'TGrpcCalloutLibrary',
 	#classTraits : 'TGrpcCalloutLibrary classTrait',
 	#category : #'GRPC-Bindings'
@@ -13,7 +13,7 @@ GrpcCompletionQueue class >> ffiLibraryName [
 
 { #category : #accessing }
 GrpcCompletionQueue class >> next [
-	^(self ffiCall: 'GrpcCompletionQueue grpc_completion_queue_create_for_next(nil)')
+	^(self ffiCall: 'GrpcCompletionQueue* grpc_completion_queue_create_for_next(nil)')
 		autoRelease
 ]
 

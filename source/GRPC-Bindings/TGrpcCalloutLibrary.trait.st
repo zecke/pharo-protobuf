@@ -9,7 +9,7 @@ Trait {
 
 { #category : #'as yet unclassified' }
 TGrpcCalloutLibrary classSide >> ffiLibrary [
-	^GrpcLibrary 
+	^GrpcLibrary
 ]
 
 { #category : #'as yet unclassified' }

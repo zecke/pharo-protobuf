@@ -1,8 +1,6 @@
 Class {
 	#name : #GrpcOpRecvCloseOnServer,
-	#superclass : #FFIExternalStructure,
-	#traits : 'TGrpcCalloutLibrary',
-	#classTraits : 'TGrpcCalloutLibrary classTrait',
+	#superclass : #GrpcOpBase,
 	#classVars : [
 		'OFFSET_CANCELLED'
 	],

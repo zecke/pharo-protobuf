@@ -87,7 +87,7 @@ GrpcByteBufferReader >> index: anObject [
 
 { #category : #common }
 GrpcByteBufferReader >> init: aByteBuffer [
-	^self ffiCall: 'int grpc_byte_buffer_reader_init(self, GrpcByteBuffer aByteBuffer)'
+	^self ffiCall: 'int grpc_byte_buffer_reader_init(self, GrpcByteBuffer* aByteBuffer)'
 ]
 
 { #category : #'as yet unclassified' }

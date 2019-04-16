@@ -1,6 +1,6 @@
 Class {
 	#name : #GrpcByteBuffer,
-	#superclass : #FFIExternalObject,
+	#superclass : #FFIOpaqueObject,
 	#traits : 'TGrpcCalloutLibrary',
 	#classTraits : 'TGrpcCalloutLibrary classTrait',
 	#category : #'GRPC-Bindings'
@@ -8,8 +8,29 @@ Class {
 
 { #category : #'as yet unclassified' }
 GrpcByteBuffer class >> createRaw: anArray size: aSize [
-	^(self ffiCall: 'GrpcByteBuffer* grpc_raw_byte_buffer_create(void* anArray, size_t aSize)')
+	^(self ffiCall: 'GrpcByteBuffer grpc_raw_byte_buffer_create(void* anArray, size_t aSize)')
 		autoRelease
+]
+
+{ #category : #'as yet unclassified' }
+GrpcByteBuffer class >> ffiLibraryName [
+	^self ffiLibrary
+]
+
+{ #category : #'instance creation' }
+GrpcByteBuffer class >> new [
+	self halt.
+	^super new 
+]
+
+{ #category : #'as yet unclassified' }
+GrpcByteBuffer class >> primByteBufferDestroy: aGrpcByteBuffer [ 
+	self shouldBeImplemented.
+]
+
+{ #category : #'as yet unclassified' }
+GrpcByteBuffer class >> primCreateRaw: slices size: aSize [
+	^self ffiCall: 'GrpcByteBuffer* grpc_raw_byte_buffer_create(void* slices, size_t aSize)'
 ]
 
 { #category : #deleting }

@@ -1,6 +1,6 @@
 Class {
 	#name : #GrpcCall,
-	#superclass : #FFIExternalObject,
+	#superclass : #FFIOpaqueObject,
 	#traits : 'TGrpcCalloutLibrary',
 	#classTraits : 'TGrpcCalloutLibrary classTrait',
 	#category : #'GRPC-Bindings'
@@ -10,6 +10,11 @@ Class {
 GrpcCall >> release [
 	handle ifNotNil: [self unref].
 	handle := nil.
+]
+
+{ #category : #'as yet unclassified' }
+GrpcCall >> start_batch: ops size: nops tag: tag [ 
+	^self ffiCall: 'GrpcCallError grpc_call_start_batch(self, GrpcOpArray* ops, size_t nops, void* tag, nil)'
 ]
 
 { #category : #'as yet unclassified' }

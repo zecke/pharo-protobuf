@@ -14,6 +14,16 @@ Class {
 	#category : #'GRPC-Bindings'
 }
 
+{ #category : #'as yet unclassified' }
+GrpcSlice class >> externalEmpty [
+	| empty external |
+	empty := #[] asGrpcSlice.
+	external := self externalNew.
+	1 to: self byteSize do: [:idx |
+		external getHandle byteAt: idx put: (empty getHandle byteAt: idx) ].
+	^external
+]
+
 { #category : #'field definition' }
 GrpcSlice class >> fieldsDesc [
 	"self rebuildFieldAccessors"

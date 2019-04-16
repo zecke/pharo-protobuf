@@ -258,6 +258,11 @@ GrpcStatusCode class >> enumDecl [
   GRPC_STATUS__DO_NOT_USE -1)
 ]
 
+{ #category : #'as yet unclassified' }
+GrpcStatusCode class >> externalNew [
+	^ExternalData fromHandle: (ExternalAddress allocate: ExternalType long byteSize) type: ExternalType long
+]
+
 { #category : #'class initialization' }
 GrpcStatusCode class >> initialize [
 	self initializeEnumeration

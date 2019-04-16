@@ -1,8 +1,6 @@
 Class {
 	#name : #GrpcOpSendStatusFromServer,
-	#superclass : #FFIExternalStructure,
-	#traits : 'TGrpcCalloutLibrary',
-	#classTraits : 'TGrpcCalloutLibrary classTrait',
+	#superclass : #GrpcOpBase,
 	#category : #'GRPC-Bindings-Ops'
 }
 

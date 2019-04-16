@@ -11,6 +11,11 @@ Class {
 	#category : #'GRPC-Bindings-Ops'
 }
 
+{ #category : #'as yet unclassified' }
+GrpcMetadataArray class >> ffiLibraryName [
+	^self ffiLibrary 
+]
+
 { #category : #'field definition' }
 GrpcMetadataArray class >> fieldsDesc [
 	"self rebuildFieldAccessors"
@@ -19,6 +24,13 @@ GrpcMetadataArray class >> fieldsDesc [
 		size_t capacity;
 		GrpcMetadata* metadata;
 		)
+]
+
+{ #category : #'as yet unclassified' }
+GrpcMetadataArray class >> initializedExternal [
+	^self externalNew
+		init;
+		yourself
 ]
 
 { #category : #'accessing structure variables' }
@@ -43,6 +55,16 @@ GrpcMetadataArray >> count [
 GrpcMetadataArray >> count: anObject [
 	"This method was automatically generated"
 	^handle platformSizeTAt: OFFSET_COUNT put: anObject
+]
+
+{ #category : #'private-initialization' }
+GrpcMetadataArray >> destroy [
+	self ffiCall: 'void grpc_metadata_array_destroy(self)'
+]
+
+{ #category : #'private-initialization' }
+GrpcMetadataArray >> init [
+	self ffiCall: 'void grpc_metadata_array_init(self)'
 ]
 
 { #category : #'accessing structure variables' }

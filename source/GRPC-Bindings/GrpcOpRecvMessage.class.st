@@ -1,8 +1,6 @@
 Class {
 	#name : #GrpcOpRecvMessage,
-	#superclass : #FFIExternalStructure,
-	#traits : 'TGrpcCalloutLibrary',
-	#classTraits : 'TGrpcCalloutLibrary classTrait',
+	#superclass : #GrpcOpBase,
 	#classVars : [
 		'OFFSET_RECV_MESSAGE'
 	],
@@ -13,6 +11,39 @@ Class {
 GrpcOpRecvMessage class >> fieldsDesc [
 	"self rebuildFieldAccessors"
 	^#(GrpcByteBuffer** recv_message)
+]
+
+{ #category : #'as yet unclassified' }
+GrpcOpRecvMessage class >> grpcOp [
+	^GrpcOpType GRPC_OP_RECV_MESSAGE
+]
+
+{ #category : #converting }
+GrpcOpRecvMessage >> asGrpcOp [
+	| op |
+	op := super asGrpcOp.
+	op data recv_message: self.
+	^op
+]
+
+{ #category : #accessing }
+GrpcOpRecvMessage >> default [
+	"Create some space to store the pointer and zero initialize it"
+	| pointerToByteBuffer |
+	pointerToByteBuffer := GrpcByteBuffer newPointer.
+	pointerToByteBuffer getHandle
+		pointerAt: 1 put: ExternalAddress null.
+	self recv_message:  pointerToByteBuffer
+]
+
+{ #category : #'as yet unclassified' }
+GrpcOpRecvMessage >> grpcRelease [
+	| pointer buffer |
+	pointer := self recv_message.
+	buffer := GrpcByteBuffer fromHandle: (pointer getHandle pointerAt: 1).
+	buffer getHandle isNull ifFalse: [ buffer destroy ].
+	"Free the pointer itself"
+	pointer getHandle isNull ifFalse: [ pointer free ].
 ]
 
 { #category : #'accessing structure variables' }

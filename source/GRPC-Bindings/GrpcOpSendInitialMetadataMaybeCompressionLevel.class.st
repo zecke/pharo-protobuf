@@ -1,8 +1,6 @@
 Class {
 	#name : #GrpcOpSendInitialMetadataMaybeCompressionLevel,
-	#superclass : #FFIExternalStructure,
-	#traits : 'TGrpcCalloutLibrary',
-	#classTraits : 'TGrpcCalloutLibrary classTrait',
+	#superclass : #GrpcOpBase,
 	#classVars : [
 		'OFFSET_IS_SET',
 		'OFFSET_LEVEL'

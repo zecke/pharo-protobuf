@@ -1,8 +1,6 @@
 Class {
 	#name : #GrpcOpRecvInitialMetadata,
-	#superclass : #FFIExternalStructure,
-	#traits : 'TGrpcCalloutLibrary',
-	#classTraits : 'TGrpcCalloutLibrary classTrait',
+	#superclass : #GrpcOpBase,
 	#classVars : [
 		'OFFSET_RECV_INITIAL_METADATA'
 	],
@@ -15,6 +13,18 @@ GrpcOpRecvInitialMetadata class >> fieldsDesc [
 	^#(
 		GrpcMetadataArray* recv_initial_metadata;
 		)
+]
+
+{ #category : #'as yet unclassified' }
+GrpcOpRecvInitialMetadata class >> grpcOp [
+	^GrpcOpType GRPC_OP_RECV_INITIAL_METADATA
+]
+
+{ #category : #'as yet unclassified' }
+GrpcOpRecvInitialMetadata >> grpcRelease [
+	| metadata |
+	metadata := self recv_initial_metadata.
+	metadata getHandle isNull ifFalse: [metadata release].
 ]
 
 { #category : #'accessing structure variables' }

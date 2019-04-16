@@ -1,23 +1,28 @@
 Class {
 	#name : #GrpcOpSendMessage,
-	#superclass : #FFIExternalStructure,
-	#traits : 'TGrpcCalloutLibrary',
-	#classTraits : 'TGrpcCalloutLibrary classTrait',
+	#superclass : #GrpcOpBase,
 	#classVars : [
 		'OFFSET_SEND_MESSAGE'
 	],
 	#category : #'GRPC-Bindings-Ops'
 }
 
-{ #category : #'as yet unclassified' }
-GrpcOpSendMessage class >> fieldDesc [
-	
-]
-
 { #category : #'field definition' }
 GrpcOpSendMessage class >> fieldsDesc [
 	"self rebuildFieldAccessors"
 	^#(GrpcByteBuffer* send_message;)
+]
+
+{ #category : #'as yet unclassified' }
+GrpcOpSendMessage class >> grpcOp [
+	^GrpcOpType GRPC_OP_SEND_MESSAGE
+]
+
+{ #category : #'as yet unclassified' }
+GrpcOpSendMessage >> grpcRelease [
+	| buffer |
+	buffer := self send_message.
+	buffer getHandle isNull ifFalse: [ buffer release ].
 ]
 
 { #category : #'accessing structure variables' }
