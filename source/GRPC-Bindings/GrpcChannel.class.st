@@ -18,6 +18,11 @@ GrpcChannel class >> newInsecure: aTarget [
 ]
 
 { #category : #'as yet unclassified' }
+GrpcChannel >> check_connectivity: tryToConnect [
+	^self ffiCall: 'GrpcConnectivityState grpc_channel_check_connectivity_state(self, int tryToConnect)'
+]
+
+{ #category : #'as yet unclassified' }
 GrpcChannel >> createCall: aQueue method: aMethodSlice deadline: aDeadline [
 	^(self ffiCall: 'GrpcCall* grpc_channel_create_call(self, nil, 0, GrpcCompletionQueue* aQueue,
 											GrpcSlice aMethodSlice, nil,
@@ -43,6 +48,11 @@ GrpcChannel >> getTarget [
 	| target |
 	target := self prim_get_target.
 	^ [ target fromCString ] ensure: [Gpr free: target].
+]
+
+{ #category : #'as yet unclassified' }
+GrpcChannel >> ping: aQueue tag: aTag [ 
+	^self ffiCall: 'void grpc_channel_ping(self, GrpcCompletionQueue* aQueue, void* aTag, nil)'
 ]
 
 { #category : #'as yet unclassified' }
