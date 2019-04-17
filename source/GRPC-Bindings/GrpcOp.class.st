@@ -27,8 +27,15 @@ GrpcOp class >> fieldsDesc [
 { #category : #'as yet unclassified' }
 GrpcOp class >> with: aType [ 
 	^GrpcOp new
+		op: aType;
 		flags: 0;
-		reserved: (ExternalData fromHandle: ExternalAddress null type: ExternalType void asPointerType)
+		reserved: (ExternalData fromHandle: ExternalAddress null)
+]
+
+{ #category : #'as yet unclassified' }
+GrpcOp >> copyDataFrom: anOp [
+	1 to: anOp class byteSize do: [:idx |
+		self getHandle byteAt: (OFFSET_DATA + idx - 1) put: (anOp getHandle byteAt: idx) ]
 ]
 
 { #category : #'accessing structure variables' }
@@ -62,7 +69,7 @@ GrpcOp >> grpcRelease [
 	op := self op.
 	op = GrpcOpType GRPC_OP_SEND_INITIAL_METADATA ifTrue: [ ^self data send_initial_metadata grpcRelease ].
 	op = GrpcOpType GRPC_OP_SEND_MESSAGE ifTrue: [ ^self data send_message grpcRelease ].
-	op = GrpcOpType GRPC_OP_SEND_CLOSE_FROM_CLIENT ifTrue: [ self halt ].
+	op = GrpcOpType GRPC_OP_SEND_CLOSE_FROM_CLIENT ifTrue: [ "nothing" ^self. ].
 	op = GrpcOpType GRPC_OP_SEND_STATUS_FROM_SERVER ifTrue: [ self halt ].
 	op = GrpcOpType GRPC_OP_RECV_INITIAL_METADATA ifTrue: [ ^self data recv_initial_metadata grpcRelease ].
 	op = GrpcOpType GRPC_OP_RECV_MESSAGE ifTrue: [ ^self data recv_message grpcRelease ].

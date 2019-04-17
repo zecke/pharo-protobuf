@@ -102,7 +102,7 @@ GrpcByteBufferReader >> readAll [
 ]
 
 { #category : #common }
-GrpcByteBufferReader >> release [
+GrpcByteBufferReader >> releaseData [
 	self destroy.
 	self free.
 ]

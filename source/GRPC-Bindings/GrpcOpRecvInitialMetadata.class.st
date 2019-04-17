@@ -24,7 +24,7 @@ GrpcOpRecvInitialMetadata class >> grpcOp [
 GrpcOpRecvInitialMetadata >> grpcRelease [
 	| metadata |
 	metadata := self recv_initial_metadata.
-	metadata getHandle isNull ifFalse: [metadata release].
+	metadata getHandle isNull ifFalse: [metadata releaseData].
 ]
 
 { #category : #'accessing structure variables' }

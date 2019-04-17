@@ -50,9 +50,9 @@ GrpcOpRecvStatusOnClient >> error_string: anObject [
 
 { #category : #'as yet unclassified' }
 GrpcOpRecvStatusOnClient >> grpcRelease [
-	self trailing_metadata getHandle isNull ifFalse: [ self trailing_metadata release ].
+	self trailing_metadata getHandle isNull ifFalse: [ self trailing_metadata releaseData ].
 	self status_code getHandle isNull ifFalse: [ self status_code free ].
-	self status_details getHandle isNull ifFalse: [self status_details release ].
+	self status_details getHandle isNull ifFalse: [self status_details releaseData ].
 	self error_string getHandle isNull ifFalse: [
 		| ptr |
 		ptr := self error_string getHandle pointerAt: 1.

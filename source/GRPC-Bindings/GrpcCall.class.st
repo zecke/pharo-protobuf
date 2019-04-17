@@ -12,7 +12,7 @@ GrpcCall class >> ffiLibraryName [
 ]
 
 { #category : #dependencies }
-GrpcCall >> release [
+GrpcCall >> releaseData [
 	handle ifNotNil: [self unref].
 	handle := nil.
 ]

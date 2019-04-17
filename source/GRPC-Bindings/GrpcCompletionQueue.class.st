@@ -34,7 +34,7 @@ GrpcCompletionQueue >> next: aTimeSpec [
 ]
 
 { #category : #'library path' }
-GrpcCompletionQueue >> release [
+GrpcCompletionQueue >> releaseData [
 	self shutdown.
 	self destroy.
 	self free.

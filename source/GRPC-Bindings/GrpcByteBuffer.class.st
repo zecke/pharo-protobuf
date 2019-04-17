@@ -8,8 +8,11 @@ Class {
 
 { #category : #'as yet unclassified' }
 GrpcByteBuffer class >> createRaw: anArray size: aSize [
-	^(self ffiCall: 'GrpcByteBuffer* grpc_raw_byte_buffer_create(void* anArray, size_t aSize)')
-		autoRelease
+	| buffer |
+	buffer := self primCreateRaw: anArray size: aSize.
+	buffer getHandle isExternalAddress ifFalse: [ 
+		buffer handle: buffer getHandle getHandle ].
+	^buffer
 ]
 
 { #category : #'as yet unclassified' }
@@ -45,10 +48,10 @@ GrpcByteBuffer >> readAll [
 	^[
 		reader init: self.
 		reader readAll.
-	] ensure: [ reader release ]
+	] ensure: [ reader releaseData ]
 ]
 
 { #category : #'initialize-release' }
-GrpcByteBuffer >> release [
+GrpcByteBuffer >> releaseData [
 	self destroy.
 ]

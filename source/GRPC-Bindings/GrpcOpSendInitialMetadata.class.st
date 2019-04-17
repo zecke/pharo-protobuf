@@ -24,14 +24,6 @@ GrpcOpSendInitialMetadata class >> grpcOp [
 	^GrpcOpType GRPC_OP_SEND_INITIAL_METADATA
 ]
 
-{ #category : #'as yet unclassified' }
-GrpcOpSendInitialMetadata >> asGrpcOp [
-	| op |
-	op := super asGrpcOp.
-	op data send_initial_metadata: self.
-	^op
-]
-
 { #category : #'accessing structure variables' }
 GrpcOpSendInitialMetadata >> count [
 	"This method was automatically generated"

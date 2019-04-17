@@ -18,14 +18,6 @@ GrpcOpRecvMessage class >> grpcOp [
 	^GrpcOpType GRPC_OP_RECV_MESSAGE
 ]
 
-{ #category : #converting }
-GrpcOpRecvMessage >> asGrpcOp [
-	| op |
-	op := super asGrpcOp.
-	op data recv_message: self.
-	^op
-]
-
 { #category : #accessing }
 GrpcOpRecvMessage >> default [
 	"Create some space to store the pointer and zero initialize it"

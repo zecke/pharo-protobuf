@@ -10,8 +10,9 @@ Class {
 GrpcOpBase >> asGrpcOp [
 	^GrpcOp new
 		flags: 0;
-		reserved: (ExternalData fromHandle: ExternalAddress null type: ExternalType void asPointerType);
+		reserved: (ExternalData fromHandle: ExternalAddress null);
 		op: self class grpcOp;
+		copyDataFrom: self;
 		yourself
 		
 ]

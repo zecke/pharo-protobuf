@@ -35,7 +35,7 @@ GrpcSlice class >> fieldsDesc [
 
 { #category : #finalization }
 GrpcSlice class >> finalizeResourceData: aSlice [
-	aSlice release.
+	aSlice releaseData.
 ]
 
 { #category : #finalization }
@@ -112,7 +112,7 @@ GrpcSlice >> refcount: anObject [
 ]
 
 { #category : #dependencies }
-GrpcSlice >> release [
+GrpcSlice >> releaseData [
 	self unref.
 	self free.
 ]

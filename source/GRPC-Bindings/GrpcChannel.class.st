@@ -51,7 +51,7 @@ GrpcChannel >> prim_get_target [
 ]
 
 { #category : #dependencies }
-GrpcChannel >> release [
+GrpcChannel >> releaseData [
 	handle ifNotNil: [self destroy].
 	self free.
 ]

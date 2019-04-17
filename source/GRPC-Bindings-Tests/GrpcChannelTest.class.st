@@ -13,12 +13,12 @@ GrpcChannelTest >> testGetTarget [
 	channel := GrpcChannel newInsecure: 'tcp://localhost:6666'.
 	target := channel getTarget.
 	self assert: target equals: 'tcp://localhost:6666'.
-	channel release.
+	channel releaseData.
 ]
 
 { #category : #tests }
 GrpcChannelTest >> testInsecureCreateAndDestroy_noCrash [
 	| channel |
 	channel := GrpcChannel newInsecure: 'tcp://localhost:6666'.
-	channel release.
+	channel releaseData.
 ]

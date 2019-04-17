@@ -78,3 +78,9 @@ GrpcMetadataArray >> metadata: anObject [
 	"This method was automatically generated"
 	handle pointerAt: OFFSET_METADATA put: anObject getHandle.
 ]
+
+{ #category : #'as yet unclassified' }
+GrpcMetadataArray >> releaseData [
+	self destroy.
+	self free.
+]

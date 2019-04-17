@@ -11,7 +11,7 @@ Class {
 GrpcCompletionQueueTest >> testNewQueue_creation [
 	| queue |
 	queue := GrpcCompletionQueue next.
-	queue release.
+	queue releaseData.
 ]
 
 { #category : #tests }
@@ -25,5 +25,5 @@ GrpcCompletionQueueTest >> testNext_noWait_success [
 	self assert: res type equals: GrpcCompletionType GRPC_QUEUE_TIMEOUT.
 
 	"Give up the memory"
-	queue release.
+	queue releaseData.
 ]

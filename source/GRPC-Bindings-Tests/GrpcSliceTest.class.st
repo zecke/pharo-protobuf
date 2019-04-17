@@ -17,8 +17,7 @@ GrpcSliceTest >> testSlice_creation_external [
 	these operations are bogus."
 	slice ref.
 	slice unref.
-	slice release.
-	
+	slice releaseData.
 ]
 
 { #category : #tests }
@@ -31,6 +30,5 @@ GrpcSliceTest >> testSlice_creation_inline [
 	these operations are bogus."
 	slice ref.
 	slice unref.
-	slice release.
-	
+	slice releaseData.
 ]

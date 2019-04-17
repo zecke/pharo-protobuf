@@ -22,13 +22,13 @@ GrpcOpSendMessage class >> grpcOp [
 GrpcOpSendMessage >> grpcRelease [
 	| buffer |
 	buffer := self send_message.
-	buffer getHandle isNull ifFalse: [ buffer release ].
+	buffer getHandle isNull ifFalse: [ buffer releaseData ].
 ]
 
 { #category : #'accessing structure variables' }
 GrpcOpSendMessage >> send_message [
-	"This method was automatically generated"
-	^ExternalData fromHandle: (handle pointerAt: OFFSET_SEND_MESSAGE) type: ExternalType void asPointerType
+	"Manually overriden.."
+	^GrpcByteBuffer fromHandle: (handle pointerAt: OFFSET_SEND_MESSAGE)
 ]
 
 { #category : #'accessing structure variables' }
