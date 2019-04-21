@@ -10,9 +10,17 @@ GrpcOpArray class >> externalNew: size [
 ]
 
 { #category : #'as yet unclassified' }
+GrpcOpArray >> findTag: aTag [
+	| idx |
+	idx := self findFirst: [:each | each op = aTag ].
+	^self at: idx.
+]
+
+{ #category : #'as yet unclassified' }
 GrpcOpArray >> grpcRelease [
 	"Release the memory according to the ownership"
 	self do: [:each |
 		each grpcRelease
 	].
+	self free.
 ]

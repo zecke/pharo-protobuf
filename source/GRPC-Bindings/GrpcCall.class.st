@@ -11,6 +11,11 @@ GrpcCall class >> ffiLibraryName [
 	^self ffiLibrary
 ]
 
+{ #category : #'as yet unclassified' }
+GrpcCall >> cancel [
+	^self ffiCall: 'GrpcCallError grpc_call_cancel(self, nil)'
+]
+
 { #category : #dependencies }
 GrpcCall >> releaseData [
 	handle ifNotNil: [self unref].

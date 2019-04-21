@@ -18,6 +18,17 @@ GrpcOpRecvMessage class >> grpcOp [
 	^GrpcOpType GRPC_OP_RECV_MESSAGE
 ]
 
+{ #category : #'as yet unclassified' }
+GrpcOpRecvMessage >> asByteArray [
+	self recv_message getHandle ifNotNil: [:aHandle |
+		| pointer |
+		pointer := aHandle pointerAt: 1.
+		pointer isNull ifFalse: [
+			^(GrpcByteBuffer fromHandle: pointer) readAllAsByteArray.
+		]].
+	^#[]
+]
+
 { #category : #accessing }
 GrpcOpRecvMessage >> default [
 	"Create some space to store the pointer and zero initialize it"

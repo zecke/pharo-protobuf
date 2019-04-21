@@ -51,6 +51,13 @@ GrpcByteBuffer >> readAll [
 	] ensure: [ reader releaseData ]
 ]
 
+{ #category : #'as yet unclassified' }
+GrpcByteBuffer >> readAllAsByteArray [
+	| slice |
+	slice := self readAll.
+	^[ slice asByteArray ] ensure: [ slice unref ].
+]
+
 { #category : #'initialize-release' }
 GrpcByteBuffer >> releaseData [
 	self destroy.

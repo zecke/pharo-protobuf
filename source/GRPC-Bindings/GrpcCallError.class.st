@@ -22,6 +22,102 @@ Class {
 	#category : #'GRPC-Bindings'
 }
 
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_ALREADY_ACCEPTED [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_ALREADY_ACCEPTED
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_ALREADY_FINISHED [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_ALREADY_FINISHED
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_ALREADY_INVOKED [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_ALREADY_INVOKED
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_BATCH_TOO_BIG [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_BATCH_TOO_BIG
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_COMPLETION_QUEUE_SHUTDOWN [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_COMPLETION_QUEUE_SHUTDOWN
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_INVALID_FLAGS [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_INVALID_FLAGS
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_INVALID_MESSAGE [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_INVALID_MESSAGE
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_INVALID_METADATA [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_INVALID_METADATA
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_NOT_INVOKED [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_NOT_INVOKED
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_NOT_ON_CLIENT [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_NOT_ON_CLIENT
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_NOT_ON_SERVER [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_NOT_ON_SERVER
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_NOT_SERVER_COMPLETION_QUEUE [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_NOT_SERVER_COMPLETION_QUEUE
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_PAYLOAD_TYPE_MISMATCH [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_PAYLOAD_TYPE_MISMATCH
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_ERROR_TOO_MANY_OPERATIONS [
+	"This method was automatically generated"
+	^ GRPC_CALL_ERROR_TOO_MANY_OPERATIONS
+]
+
+{ #category : #'accessing enum' }
+GrpcCallError class >> GRPC_CALL_OK [
+	"This method was automatically generated"
+	^ GRPC_CALL_OK
+]
+
 { #category : #'enum declaration' }
 GrpcCallError class >> enumDecl [
 " Result of a grpc call. If the caller satisfies the prerequisites of a

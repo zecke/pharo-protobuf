@@ -28,12 +28,12 @@ GrpcOpRecvStatusOnClient class >> grpcOp [
 { #category : #accessing }
 GrpcOpRecvStatusOnClient >> default [
 	| error_string |
-	self trailing_metadata: GrpcMetadataArray initializedExternal.
+	"self trailing_metadata: GrpcMetadataArray initializedExternal."
 	self status_code: GrpcStatusCode externalNew.
 	self status_details: GrpcSlice externalEmpty.
-	error_string := FFIOpaqueObject newPointer.
+	"error_string := FFIOpaqueObject newPointer.
 	error_string getHandle pointerAt: 1 put: ExternalAddress null.
-	self error_string: error_string.
+	self error_string: error_string."
 ]
 
 { #category : #'accessing structure variables' }
@@ -58,6 +58,11 @@ GrpcOpRecvStatusOnClient >> grpcRelease [
 		ptr := self error_string getHandle pointerAt: 1.
 		ptr isNull ifFalse: [Gpr free: ptr].
 		self error_string free].
+]
+
+{ #category : #'as yet unclassified' }
+GrpcOpRecvStatusOnClient >> statusCode [
+	^GrpcStatusCode fromInteger: (self status_code getHandle signedLongAt: 1)
 ]
 
 { #category : #'accessing structure variables' }

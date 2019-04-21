@@ -3,6 +3,12 @@ Class {
 	#superclass : #FFIOpaqueObject,
 	#traits : 'TGrpcCalloutLibrary',
 	#classTraits : 'TGrpcCalloutLibrary classTrait',
+	#instVars : [
+		'pending',
+		'mutex',
+		'pollProc',
+		'quit'
+	],
 	#category : #'GRPC-Bindings'
 }
 
@@ -13,8 +19,20 @@ GrpcCompletionQueue class >> ffiLibraryName [
 
 { #category : #accessing }
 GrpcCompletionQueue class >> next [
-	^(self ffiCall: 'GrpcCompletionQueue* grpc_completion_queue_create_for_next(nil)')
-		autoRelease
+	^self primNext
+		initializeDefault;
+		yourself
+]
+
+{ #category : #accessing }
+GrpcCompletionQueue class >> primNext [
+	^self ffiCall: 'GrpcCompletionQueue* grpc_completion_queue_create_for_next(nil)'
+
+]
+
+{ #category : #'queue-management' }
+GrpcCompletionQueue >> createNewEntry [
+	^PharoGrpcCompletionItem new
 ]
 
 { #category : #deleting }
@@ -28,9 +46,59 @@ GrpcCompletionQueue >> free [
 	handle := nil.
 ]
 
+{ #category : #initialization }
+GrpcCompletionQueue >> initializeDefault [
+	pending := OrderedCollection new.
+	mutex := Semaphore forMutualExclusion.
+]
+
 { #category : #accessing }
 GrpcCompletionQueue >> next: aTimeSpec [
 	^self ffiCall: 'GrpcEvent grpc_completion_queue_next(self, GprTimespec aTimeSpec, nil)'
+]
+
+{ #category : #'queue-management' }
+GrpcCompletionQueue >> nextTag [
+	"Finds the first free slot or makes more space and returns a queue entry that
+	will have a semaphore."
+	"TODO(zecke): If this becomes a bottleneck we can maintain a freelist"
+	mutex critical: [
+		| newEntry |
+		newEntry := self createNewEntry.
+		pending do: [:each :i |
+			each ifNil: [
+				^pending at: i put: (newEntry tag: i; yourself).
+			]].
+	
+		"TODO(holgerf): Optimize this later but be correct first."
+		pending addLast: newEntry.
+		newEntry tag: (ExternalAddress fromAddress: (pending identityIndexOf: newEntry)).
+		^newEntry
+	].
+]
+
+{ #category : #initialization }
+GrpcCompletionQueue >> operationComplete: aResult [
+	| entry |
+	mutex critical: [
+		"Fetch the entry at the point. We assume it exists."
+		entry := pending at: aResult tag asInteger.
+		pending at: aResult tag asInteger put: nil.
+	].
+	entry
+		result: aResult;
+		signalCompletion.
+]
+
+{ #category : #initialization }
+GrpcCompletionQueue >> pollOnce [
+	"Get the next entry"
+	| result |
+	result := self next: (GprTimespec zero: GprClockType GPR_TIMESPAN).
+	result type = GrpcCompletionType GRPC_QUEUE_TIMEOUT ifTrue: [ ^self ].
+	result type = GrpcCompletionType GRPC_QUEUE_SHUTDOWN ifTrue: [ ^self queueShutdown: result ].
+	result type = GrpcCompletionType GRPC_OP_COMPLETE ifTrue: [ ^self operationComplete: result ].
+	^self error: 'Unknown event type returned'
 ]
 
 { #category : #'library path' }
@@ -43,4 +111,15 @@ GrpcCompletionQueue >> releaseData [
 { #category : #deleting }
 GrpcCompletionQueue >> shutdown [
 	self ffiCall: 'void grpc_completion_queue_shutdown(self)'
+]
+
+{ #category : #'as yet unclassified' }
+GrpcCompletionQueue >> startBackgroundPoll [
+	quit := false.
+	pollProc := [
+		[ quit ] whileFalse: [
+			(Delay forMilliseconds: 100) wait.
+			self pollOnce.
+		].
+	] forkNamed: 'GRPC completion queue.'
 ]
