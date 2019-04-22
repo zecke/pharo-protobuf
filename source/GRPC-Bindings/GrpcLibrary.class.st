@@ -2,7 +2,8 @@ Class {
 	#name : #GrpcLibrary,
 	#superclass : #FFILibrary,
 	#instVars : [
-		'initialized'
+		'initialized',
+		'queue'
 	],
 	#category : #'GRPC-Bindings'
 }
@@ -21,11 +22,16 @@ GrpcLibrary class >> initialize [
 GrpcLibrary class >> startUp: isImageStarting [
 
 	isImageStarting ifTrue: [
-		self uniqueInstance initializeGrpc.
-
-		"Stop all completion queues."
+		"Stop all completion queues. TODO(zecke): Time them out as well?"
 		GrpcCompletionQueue allInstancesDo: [:each | each quit ].
+
+		self uniqueInstance initializeGrpc.
 	]
+]
+
+{ #category : #'accessing platform' }
+GrpcLibrary >> completionQueue [
+	^queue
 ]
 
 { #category : #'accessing platform' }
@@ -36,6 +42,8 @@ GrpcLibrary >> grpc_init [
 { #category : #'accessing platform' }
 GrpcLibrary >> initializeGrpc [
 	[ self grpc_init.
+	queue := GrpcCompletionQueue next.
+	queue startBackgroundPoll.
 	self recordInitializationSuccess ]
 		on: Error
 		do: [ :ex | 

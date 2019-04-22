@@ -49,12 +49,13 @@ GrpcServer >> register_completion_queue: queue [
 GrpcServer >> releaseData [
 	| tag |
 	"Shutdown the server"
-	tag := queue nextTag.
-	self shutdown_and_notify: queue tag: tag handle.
-	tag waitForCompletion.
+	handle ifNotNil: [
+		tag := queue nextTag.
+		self shutdown_and_notify: queue tag: tag handle.
+		tag waitForCompletion.
 
-	self cancel_all_calls.
-	self destroy.
+		self cancel_all_calls.
+		self destroy.].
 	handle := nil.
 ]
 
