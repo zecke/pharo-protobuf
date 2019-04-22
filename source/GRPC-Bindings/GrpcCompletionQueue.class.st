@@ -65,9 +65,9 @@ GrpcCompletionQueue >> nextTag [
 	mutex critical: [
 		| newEntry |
 		newEntry := self createNewEntry.
-		pending do: [:each :i |
+		pending doWithIndex: [:each :i |
 			each ifNil: [
-				^pending at: i put: (newEntry tag: i; yourself).
+				^pending at: i put: (newEntry tag: (ExternalAddress fromAddress: i); yourself).
 			]].
 	
 		"TODO(holgerf): Optimize this later but be correct first."
@@ -94,11 +94,20 @@ GrpcCompletionQueue >> operationComplete: aResult [
 GrpcCompletionQueue >> pollOnce [
 	"Get the next entry"
 	| result |
+	
+	"Safety measure on resume of the image."
+	self getHandle ifNil: [ ^self ].
+
 	result := self next: (GprTimespec zero: GprClockType GPR_TIMESPAN).
 	result type = GrpcCompletionType GRPC_QUEUE_TIMEOUT ifTrue: [ ^self ].
 	result type = GrpcCompletionType GRPC_QUEUE_SHUTDOWN ifTrue: [ ^self queueShutdown: result ].
 	result type = GrpcCompletionType GRPC_OP_COMPLETE ifTrue: [ ^self operationComplete: result ].
 	^self error: 'Unknown event type returned'
+]
+
+{ #category : #accessing }
+GrpcCompletionQueue >> quit [
+	quit := true.
 ]
 
 { #category : #'library path' }
@@ -118,8 +127,8 @@ GrpcCompletionQueue >> startBackgroundPoll [
 	quit := false.
 	pollProc := [
 		[ quit ] whileFalse: [
-			(Delay forMilliseconds: 100) wait.
 			self pollOnce.
+			(Delay forMilliseconds: 100) wait.
 		].
 	] forkNamed: 'GRPC completion queue.'
 ]

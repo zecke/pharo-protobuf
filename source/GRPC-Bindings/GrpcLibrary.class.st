@@ -20,7 +20,12 @@ GrpcLibrary class >> initialize [
 { #category : #'accessing platform' }
 GrpcLibrary class >> startUp: isImageStarting [
 
-	isImageStarting ifTrue: [ self uniqueInstance initializeGrpc ]
+	isImageStarting ifTrue: [
+		self uniqueInstance initializeGrpc.
+
+		"Stop all completion queues."
+		GrpcCompletionQueue allInstancesDo: [:each | each quit ].
+	]
 ]
 
 { #category : #'accessing platform' }
