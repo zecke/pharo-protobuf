@@ -92,16 +92,16 @@ GrpcCompletionQueue >> operationComplete: aResult [
 
 { #category : #initialization }
 GrpcCompletionQueue >> pollOnce [
-	"Get the next entry"
+	"Gets the next entry out of the queue and returns true if one was popped."
 	| result |
 	
 	"Safety measure on resume of the image."
-	self getHandle ifNil: [ ^self ].
+	self getHandle ifNil: [ ^false ].
 
 	result := self next: (GprTimespec zero: GprClockType GPR_TIMESPAN).
-	result type = GrpcCompletionType GRPC_QUEUE_TIMEOUT ifTrue: [ ^self ].
-	result type = GrpcCompletionType GRPC_QUEUE_SHUTDOWN ifTrue: [ ^self queueShutdown: result ].
-	result type = GrpcCompletionType GRPC_OP_COMPLETE ifTrue: [ ^self operationComplete: result ].
+	result type = GrpcCompletionType GRPC_QUEUE_TIMEOUT ifTrue: [ ^false ].
+	result type = GrpcCompletionType GRPC_QUEUE_SHUTDOWN ifTrue: [ self queueShutdown: result. false ].
+	result type = GrpcCompletionType GRPC_OP_COMPLETE ifTrue: [ self operationComplete: result. true ].
 	^self error: 'Unknown event type returned'
 ]
 
@@ -117,6 +117,12 @@ GrpcCompletionQueue >> releaseData [
 	self free.
 ]
 
+{ #category : #'as yet unclassified' }
+GrpcCompletionQueue >> runPoll [
+	[self pollOnce] whileTrue: [ ].
+	(Delay forMilliseconds: 10) wait.
+]
+
 { #category : #deleting }
 GrpcCompletionQueue >> shutdown [
 	self ffiCall: 'void grpc_completion_queue_shutdown(self)'
@@ -127,8 +133,7 @@ GrpcCompletionQueue >> startBackgroundPoll [
 	quit := false.
 	pollProc := [
 		[ quit ] whileFalse: [
-			self pollOnce.
-			(Delay forMilliseconds: 100) wait.
+			self runPoll.
 		].
 	] forkNamed: 'GRPC completion queue.'
 ]
