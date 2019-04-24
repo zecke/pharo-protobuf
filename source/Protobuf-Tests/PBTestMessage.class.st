@@ -16,6 +16,11 @@ PBTestMessage >> addOtherColor: aColor [
 ]
 
 { #category : #accessing }
+PBTestMessage >> add_other_colors: anObject [
+	self other_colorss add: anObject.
+]
+
+{ #category : #accessing }
 PBTestMessage >> color [
 	 ^color
 ]
@@ -49,4 +54,9 @@ PBTestMessage >> other_colors [
 { #category : #accessing }
 PBTestMessage >> other_colors: anObject [
 	other_colors:= anObject.
+]
+
+{ #category : #accessing }
+PBTestMessage >> other_colorss [
+	 ^other_colors ifNil: [ other_colors := OrderedCollection new ]
 ]
