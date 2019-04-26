@@ -100,8 +100,8 @@ GrpcCompletionQueue >> pollOnce [
 
 	result := self next: (GprTimespec zero: GprClockType GPR_TIMESPAN).
 	result type = GrpcCompletionType GRPC_QUEUE_TIMEOUT ifTrue: [ ^false ].
-	result type = GrpcCompletionType GRPC_QUEUE_SHUTDOWN ifTrue: [ self queueShutdown: result. false ].
-	result type = GrpcCompletionType GRPC_OP_COMPLETE ifTrue: [ self operationComplete: result. true ].
+	result type = GrpcCompletionType GRPC_QUEUE_SHUTDOWN ifTrue: [ self queueShutdown: result. ^false ].
+	result type = GrpcCompletionType GRPC_OP_COMPLETE ifTrue: [ self operationComplete: result. ^true ].
 	^self error: 'Unknown event type returned'
 ]
 
