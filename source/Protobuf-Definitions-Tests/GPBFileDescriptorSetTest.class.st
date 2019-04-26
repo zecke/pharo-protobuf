@@ -16,10 +16,9 @@ GPBFileDescriptorSetTest class >> fullDescriptor [
 GPBFileDescriptorSetTest class >> regenerateDefinitions [
 	| descriptor nameTable generator |
 	descriptor := GPBFileDescriptorSet
-		materializeFrom: '/Users/ich/source/google/tensorflow/tf.pb' asFileReference  binaryReadStream.
+		materializeFrom: self fullDescriptor readStream.
 	nameTable := GPBTypeNamesVisitor new.
-	nameTable customPrefix: 'TF_'.
-	generator := GPBGeneratingVisitor new typeNames: nameTable; targetPackage: 'Tensorflow-Definitions'.
+	generator := GPBGeneratingVisitor new typeNames: nameTable; targetPackage: 'Protobuf-Definitions'.
 	descriptor visit: nameTable.
 	generator visit: descriptor.
 	
