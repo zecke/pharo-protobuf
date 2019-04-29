@@ -120,7 +120,7 @@ GrpcCompletionQueue >> releaseData [
 { #category : #'as yet unclassified' }
 GrpcCompletionQueue >> runPoll [
 	[self pollOnce] whileTrue: [ ].
-	(Delay forMilliseconds: 10) wait.
+	(Delay forMilliseconds: 2) wait.
 ]
 
 { #category : #deleting }

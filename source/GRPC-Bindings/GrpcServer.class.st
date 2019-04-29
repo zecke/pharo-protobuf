@@ -46,6 +46,11 @@ GrpcServer >> register_completion_queue: queue [
 ]
 
 { #category : #'as yet unclassified' }
+GrpcServer >> register_method: aName payloadHandling: aHandling flags: aFlag [
+	^self ffiCall: 'void* grpc_server_register_method(self, String aName, nil, GrpcServerRegisterMethodPayloadHandling aHandling, uint32 aFlag)'
+]
+
+{ #category : #'as yet unclassified' }
 GrpcServer >> releaseData [
 	| tag |
 	"Shutdown the server"
