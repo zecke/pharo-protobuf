@@ -46,10 +46,10 @@ GrpcStub >> genericUnaryCall: aMethodName param: anEncodedParameter resultClass:
 		queueTag := queue nextTag.
 		res := call start_batch: batch size: batch size tag: queueTag handle.
 		res = GrpcCallError GRPC_CALL_OK ifFalse: [
-			^self error: 'Creating the call failed.'].
+			^PharoGrpcCallError signal: 'Creating the call failed.'].
 		queueTag waitForCompletion.
 		queueTag result success = 0
-			ifTrue: [ self halt ]
+			ifTrue: [ PharoGrpcCallError signal: 'Call did not complete' ]
 			ifFalse: [ self handleResult: queueTag result batch: batch resultClass: aResultClass].
 	] ensure: [
 		encodedSlice releaseData.
@@ -63,6 +63,9 @@ GrpcStub >> handleResult: aResult batch: aBatch resultClass: aResultClass [
 	| status statusCode encodedData |
 	status := aBatch findTag: GrpcOpType GRPC_OP_RECV_STATUS_ON_CLIENT.
 	statusCode := status data recv_status_on_client statusCode.
+	statusCode = GrpcStatusCode GRPC_STATUS_OK ifFalse: [
+		^PharoGrpcCallError signal: 'Received an error: ', statusCode item.
+	].
 	encodedData := (aBatch findTag: GrpcOpType GRPC_OP_RECV_MESSAGE) data recv_message asByteArray.
 	^aResultClass unmarshalFrom: encodedData readStream.
 ]
