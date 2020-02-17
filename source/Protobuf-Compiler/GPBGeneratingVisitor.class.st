@@ -22,6 +22,8 @@ GPBGeneratingVisitor class >> generateInitializerFor: aProtoClass [
 			nextPutAll: '	super initialize.'; cr.
 		aProtoClass slots do: [:slot |
 			slot hasDefaultValue ifTrue: [
+				"Attempt to resolve the slot."
+				slot resolveEncodingType.
 				stream
 					tab;
 					nextPutAll: slot fieldName;
