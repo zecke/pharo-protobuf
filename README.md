@@ -49,4 +49,52 @@ TF_GraphDef materializeFrom: 'inception_v3_2016_08_28_frozen.pb' asFileReference
 The repository includes work-in-progress bindings to the gRPC C library. This
 requires at least Pharo8.0 to include FFI fixes.
 
-TODO(zecke): Document the state of it.
+
+## State of simple things
+
+```
+| channel queue stub |
+ "Create a new gRPC channel to a destination."
+ channel := GrpcChannel newInsecure: 'localhost:50051'.
+ channel check_connectivity: 1.
+
+ "Create a gRPC client stub for the global completionQueue."
+ queue := GrpcLibrary uniqueInstance completionQueue.
+ stub := GrpcClientStub initWith: channel queue: queue.
+
+ "Make an unary call to 'SayHello' and encode a protobuf on the fly
+ and wait up to one second for the completion. E.g. start the C++
+ server on the other side"
+ stub genericUnaryCall: '/helloworld.Greeter/SayHello' asByteArray param: (GRPC_EX_HLWHelloRequest new name: 'Smalltalk'; materialize) resultClass: GRPC_EX_HLWHelloReply timeout: 1 seconds
+```
+
+### What
+
+This was tested on macOs against v1.19.x of gRPC (4566c2a29ebec0835643b972eb99f4306c4234a3)
+installed to `/usr/local/lib/libgrpc.dylib`.
+
+
+### Known issues
+
+* ProtoBuf slots are not properly initialized on load. Fix this by running
+  `PBTypeName allSubclassesDo: #resolveEncodingType` after everything is loaded.
+
+* `GrpcLibrary` only has macModuleName and as absolute path.
+
+* `GrpcLibrary uniqueInstance completionQueue` polls for completion (limiting throughput
+  and adds fixed latency cost).
+
+
+### Todos
+
+* Create `BaselineOfGrpc` and load packages and run resolveEncodingType on load.
+* Enable CI tests on travis-ci/github actions.
+* Only `GrpcClientStub>>#genericUnaryCall:...` is implemented.
+* Basic server support is missing.
+* Streaming client/server is missing.
+* Add completion by calling a block (in addition to the waiting on a semaphore)
+* Introspection for the server (which interfaces supported)
+* Windows and Linux support
+* Remove polling for a plugin..
+* Image suspend/resume with outstanding gRPC calls.
+* Generate server and client stubs based on the service definition.
