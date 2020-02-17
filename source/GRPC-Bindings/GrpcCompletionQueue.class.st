@@ -105,6 +105,11 @@ GrpcCompletionQueue >> pollOnce [
 	^self error: 'Unknown event type returned'
 ]
 
+{ #category : #initialization }
+GrpcCompletionQueue >> queueShutdown: aResult [
+	"TODO(freyth): Implement this"
+]
+
 { #category : #accessing }
 GrpcCompletionQueue >> quit [
 	quit := true.
