@@ -1,5 +1,5 @@
 Class {
-	#name : #GrpcStub,
+	#name : #GrpcClientStub,
 	#superclass : #Object,
 	#instVars : [
 		'channel',
@@ -9,7 +9,7 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-GrpcStub class >> initWith: aChannel queue: aQueue [
+GrpcClientStub class >> initWith: aChannel queue: aQueue [
 	^self new
 		channel: aChannel;
 		queue: aQueue;
@@ -17,12 +17,12 @@ GrpcStub class >> initWith: aChannel queue: aQueue [
 ]
 
 { #category : #'as yet unclassified' }
-GrpcStub >> channel: aGrpcChannel [ 
+GrpcClientStub >> channel: aGrpcChannel [ 
 	channel := aGrpcChannel
 ]
 
 { #category : #'as yet unclassified' }
-GrpcStub >> genericUnaryCall: aMethodName param: anEncodedParameter resultClass: aResultClass timeout: aTimeout [
+GrpcClientStub >> genericUnaryCall: aMethodName param: anEncodedParameter resultClass: aResultClass timeout: aTimeout [
 	| methodSlice gprTimespec call batch encodedSlice |
 	methodSlice := aMethodName asGrpcSlice.
 	gprTimespec := GprTimespec fromDuration: aTimeout type: GprClockType GPR_TIMESPAN.
@@ -59,7 +59,7 @@ GrpcStub >> genericUnaryCall: aMethodName param: anEncodedParameter resultClass:
 ]
 
 { #category : #'as yet unclassified' }
-GrpcStub >> handleResult: aResult batch: aBatch resultClass: aResultClass [
+GrpcClientStub >> handleResult: aResult batch: aBatch resultClass: aResultClass [
 	| status statusCode encodedData |
 	status := aBatch findTag: GrpcOpType GRPC_OP_RECV_STATUS_ON_CLIENT.
 	statusCode := status data recv_status_on_client statusCode.
@@ -71,6 +71,6 @@ GrpcStub >> handleResult: aResult batch: aBatch resultClass: aResultClass [
 ]
 
 { #category : #'as yet unclassified' }
-GrpcStub >> queue: aGrpcCompletionQueue [ 
+GrpcClientStub >> queue: aGrpcCompletionQueue [ 
 	queue := aGrpcCompletionQueue
 ]

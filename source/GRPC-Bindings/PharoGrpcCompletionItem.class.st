@@ -1,18 +1,11 @@
 Class {
 	#name : #PharoGrpcCompletionItem,
-	#superclass : #Object,
+	#superclass : #PharoGrpcCompletionBase,
 	#instVars : [
-		'semaphore',
-		'tag',
-		'result'
+		'semaphore'
 	],
 	#category : #'GRPC-Bindings'
 }
-
-{ #category : #'as yet unclassified' }
-PharoGrpcCompletionItem >> handle [
-	^tag
-]
 
 { #category : #initialization }
 PharoGrpcCompletionItem >> initialize [
@@ -20,24 +13,9 @@ PharoGrpcCompletionItem >> initialize [
 	semaphore := Semaphore new.
 ]
 
-{ #category : #'as yet unclassified' }
-PharoGrpcCompletionItem >> result [
-	^ result
-]
-
-{ #category : #initialization }
-PharoGrpcCompletionItem >> result: aResult [
-	result := aResult
-]
-
 { #category : #initialization }
 PharoGrpcCompletionItem >> signalCompletion [
 	semaphore signal.
-]
-
-{ #category : #initialization }
-PharoGrpcCompletionItem >> tag: aTagAddress [
-	tag := aTagAddress
 ]
 
 { #category : #initialization }
