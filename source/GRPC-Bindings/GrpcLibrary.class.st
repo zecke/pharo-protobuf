@@ -67,3 +67,8 @@ GrpcLibrary >> recordInitializationSuccess [
 
 	initialized ifNil: [initialized := true]
 ]
+
+{ #category : #'as yet unclassified' }
+GrpcLibrary >> unixModuleName [
+	^'/usr/local/lib/libgrpc.so.9.0.0'
+]
