@@ -79,10 +79,13 @@ installed to `/usr/local/lib/libgrpc.dylib`.
 * ProtoBuf slots are not properly initialized on load. Fix this by running
   `PBTypeName allSubclassesDo: #resolveEncodingType` after everything is loaded.
 
-* `GrpcLibrary` only has macModuleName and as absolute path.
+* `GrpcLibrary startUp: true` must be called once on start up. This is fixed by having
+  a baseline.
 
 * `GrpcLibrary uniqueInstance completionQueue` polls for completion (limiting throughput
   and adds fixed latency cost).
+
+* Test failure on Linux with v1.27.x of gRPC in the completion queue.
 
 
 ### Todos
